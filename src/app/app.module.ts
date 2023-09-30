@@ -12,6 +12,9 @@ import { SignupComponent } from './users/signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryComponent } from './category/category.component';
+import { TendersComponent } from './tenders/tenders.component';
+import { QuotationsComponent } from './quotations/quotations.component';
+import { TenderstakenComponent } from './tenderstaken/tenderstaken.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,10 +22,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { CalendarModule } from 'primeng/calendar';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +39,10 @@ import { MessageService } from 'primeng/api';
     UsersComponent,
     SigninComponent,
     SignupComponent,
-    CategoryComponent
+    CategoryComponent,
+    TendersComponent,
+    QuotationsComponent,
+    TenderstakenComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +58,10 @@ import { MessageService } from 'primeng/api';
     MatCardModule,
     TableModule,
     MatSelectModule,
-    ToastModule
+    ToastModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    CalendarModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

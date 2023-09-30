@@ -93,8 +93,6 @@ export class SignupComponent implements OnInit {
         }
       });
     }
-
-
   }
 
 }

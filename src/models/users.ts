@@ -9,5 +9,6 @@ export interface Users {
     gstin:string;
     crn:number;
     password:string;
+    token:string;
     //profilepic:;
 }

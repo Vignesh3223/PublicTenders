@@ -72,7 +72,8 @@ export class SigninComponent implements OnInit {
       this.showError();
     }
     else {
-      localStorage.setItem('token', Math.random().toString());
+      var token = this.userService.getToken();
+      //localStorage.setItem('token');
       this.httpclient.post<Login>(this.loginapi, this.LoginForm.value).subscribe({
         next: (res) => {
           console.log(res);

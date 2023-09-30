@@ -7,5 +7,7 @@ export const environment = {
     //loginurl
     loginurl:"https://localhost:44372/api/Login",
     //currentuserurl
-    currentuserurl:"https://localhost:44372/api/Login/gettoken"
+    currentuserurl:"https://localhost:44372/api/Login/gettoken",
+    //tendersurl
+    tendersurl:"https://localhost:44372/api/Tenders"
 }

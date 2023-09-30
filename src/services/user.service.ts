@@ -34,6 +34,10 @@ export class UserService {
     return this.httpclient.get<Users[]>(this.users);
   }
 
+  getToken(){
+    return localStorage.getItem('token');
+  }
+
   getActiveUser() {
     return this.httpclient.get<Users[]>(this.currentuser);
   }
