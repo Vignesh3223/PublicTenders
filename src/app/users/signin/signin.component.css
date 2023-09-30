@@ -1,0 +1,15 @@
+.example-full-width{
+    width: 50%;
+    margin-left: 25%;
+}
+
+form{
+    margin: 4em auto 0 auto;
+    padding: 10px;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: blue;
+}

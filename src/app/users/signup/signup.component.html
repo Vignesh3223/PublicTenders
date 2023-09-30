@@ -1,0 +1,138 @@
+<section class="sect1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <form [formGroup]="RegisterForm" novalidate>
+                <legend class="text-center mb-5">Company Registration</legend>
+                <div class="form-group" mb-3>
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Company Name</mat-label>
+                        <input type="text" matInput placeholder="Company Name" formControlName="companyname"
+                            [ngClass]="{'is-invalid':companyname.errors && (companyname.touched || companyname.dirty),'is-valid':companyname.valid}" />
+                        <mat-error *ngIf="companyname.errors?.required">Required Field</mat-error>
+                        <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
+                            .(dots)</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group" mb-3>
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Proprieator</mat-label>
+                        <input type="text" matInput placeholder="Proprieator" formControlName="proprieator"
+                            [ngClass]="{'is-invalid':proprieator.errors && (proprieator.touched || proprieator.dirty),'is-valid':proprieator.valid}" />
+                        <mat-error *ngIf="proprieator.errors?.required">Required Field</mat-error>
+                        <mat-error *ngIf="proprieator.errors?.pattern">Name must contain only aphabets and
+                            spaces</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group" mb-3>
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Company Email</mat-label>
+                        <input type="text" matInput placeholder="Company Email" formControlName="email"
+                            [ngClass]="{'is-invalid':email.errors && (email.touched || email.dirty),'is-valid':email.valid}" />
+                        <mat-error *ngIf="email.errors?.required">Required Field</mat-error>
+                        <mat-error *ngIf="email.errors?.email && email.errors?.pattern">Enter a valid
+                            Email</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group mb-3">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Address</mat-label>
+                        <textarea matInput placeholder="Company Address" formControlName="address"
+                            [ngClass]="{'is-invalid':address.errors && (address.touched || address.dirty),'is-valid':address.valid}"></textarea>
+                        <mat-error *ngIf="address.errors?.required">Required Field</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group" mb-3>
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Contact number</mat-label>
+                        <input type="text" matInput placeholder="Contact number" formControlName="contactnumber"
+                            [ngClass]="{'is-invalid':contactnumber.errors && (contactnumber.touched || contactnumber.dirty),'is-valid':contactnumber.valid}" />
+                        <mat-error *ngIf="contactnumber.errors?.required">Required Field</mat-error>
+                        <mat-error *ngIf="contactnumber.errors?.pattern">Contact must contain only
+                            numbers</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group mb-3">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Company Sector</mat-label>
+                        <select matNativeControl formControlName="companysector"
+                            [ngClass]="{'is-invalid':companysector.errors && (companysector.touched || companysector.dirty)}">
+                            <option value="manufacture">Manufacture</option>
+                            <option value="construction">Construction</option>
+                            <option value="healthcare">Health Care</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="education">Education</option>
+                            <option value="environmental">Environmental</option>
+                            <option value="communication">Communication</option>
+                        </select>
+                        <mat-error *ngIf="companysector.errors?.required">Required Field</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group" mb-3>
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Established Date</mat-label>
+                        <input type="text" matInput placeholder="Established Date" formControlName="establisheddate"
+                            [ngClass]="{'is-invalid':establisheddate.errors && (establisheddate.touched || establisheddate.dirty),'is-valid':establisheddate.valid}" />
+                        <mat-error *ngIf="establisheddate.errors?.required">Required Field</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group" mb-3>
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>GST Reference Number</mat-label>
+                        <input type="text" matInput placeholder="GST Reference Number" formControlName="gstin"
+                            [ngClass]="{'is-invalid':gstin.errors && (gstin.touched || gstin.dirty),'is-valid':gstin.valid}" />
+                        <mat-error *ngIf="gstin.errors?.required">Required Field</mat-error>
+                        <mat-error *ngIf="gstin.errors?.pattern">GSTIN must contain only alphabets and
+                            numbers</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group" mb-3>
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Company Registration Number</mat-label>
+                        <input type="text" matInput placeholder="Company Registration Number" formControlName="crn"
+                            [ngClass]="{'is-invalid':crn.errors && (crn.touched || crn.dirty),'is-valid':crn.valid}" />
+                        <mat-error *ngIf="crn.errors?.required">Required Field</mat-error>
+                        <mat-error *ngIf="crn.errors?.pattern">CRN must contain only numbers</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group mb-3">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password"
+                            [ngClass]="{'is-invalid':password.errors && (password.touched || password.dirty),'is-valid':password.valid}" />
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="password.errors?.required">Required Field</mat-error>
+                        <mat-error *ngIf="password.errors?.pattern">Password must contain only alphabets and
+                            numbers</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- <div class="form-group mb-5">
+                    <label>Profile Picture</label><br />
+                    <input type="file" id="myFile" name="filename" formControlName="profilepic" class="form-control">
+                </div> -->
+
+                <div class="form-group text-center">
+                    <p-toast position="top-right"></p-toast>
+                    <!--back to home button-->
+                    <button class="me-3" mat-icon mat-raised-button color="warn" routerLink=''>
+                        Go Back<mat-icon>home</mat-icon></button>
+                    <!--submit button-->
+                    <button mat-icon mat-raised-button color="primary" (click)="onRegister()">
+                        Sign Up<mat-icon>done</mat-icon></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

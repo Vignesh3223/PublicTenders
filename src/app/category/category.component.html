@@ -1,0 +1,22 @@
+<section class="sect1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <p-table [value]="categorylist" styleClass="p-datatable-gridlines mt-5 text-center" [tableStyle]="{ 'min-width': '30rem' }">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>categoryId</th>
+                            <th>categoryName</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-cat>
+                        <tr>
+                            <td>{{cat.categoryId}}</td>
+                            <td>{{cat.categoryName}} </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</section>

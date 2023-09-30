@@ -1,0 +1,50 @@
+<section class="sect1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <form [formGroup]="LoginForm" novalidate>
+                <legend class="text-center mb-5">Login</legend>
+                <!--email-->
+                <div class="form-group mb-3">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Enter your email</mat-label>
+                        <input type="email" matInput placeholder="Email" formControlName="Email"
+                            [ngClass]="{'is-invalid':Email.errors && (Email.touched || Email.dirty)}" />
+                        <mat-error *ngIf="Email.errors?.required">Required Field</mat-error>
+                        <mat-error *ngIf="Email.errors?.email && Email.errors?.pattern">Enter a valid
+                            Email</mat-error>
+                    </mat-form-field>
+                </div>
+                <!--password-->
+                <div class="form-group mb-5">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Enter your password</mat-label>
+                        <input type="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password"
+                            formControlName="Password"
+                            [ngClass]="{'is-invalid':Password.errors && (Password.touched || Password.dirty)}" />
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                        <mat-error *ngIf="Password.errors?.required">Required Field</mat-error>
+                        <mat-error *ngIf="Password.errors?.minlength">Password must be greater than
+                            6 characters.
+                        </mat-error>
+                        <mat-error *ngIf="Password.errors?.maxlength">Password must be less than 14
+                            characters
+                        </mat-error>
+                        <mat-error *ngIf="Password.errors?.pattern">Password must contain only aphabets and
+                            numbers</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group text-center">
+                    <p-toast position="top-right"></p-toast>
+                    <button class="me-3" mat-icon mat-raised-button color="warn" routerLink=''>
+                        Go Back<mat-icon>home</mat-icon></button>
+                    <button mat-icon mat-raised-button color="primary" (click)="onLogin()">
+                        Sign In<mat-icon>key</mat-icon></button>
+                    <h4 class="mt-4">Don't have an Account!<a routerLink='/signup'> Sign Up...</a></h4>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
