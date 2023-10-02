@@ -1,15 +1,27 @@
-.btn1{
-    border:1px solid orange;
+.btn1 {
+    border: 1px solid orange;
     outline: 1px solid orange;
     border-radius: 25px;
     background-color: orange;
-    color:white;
+    color: white;
     padding: 10px 20px 10px 20px;
-    font-size:20px;
+    font-size: 20px;
     font-weight: 700;
 }
 
-.btn1:hover{
+.btn1:hover {
     background-color: whitesmoke;
     color: orange;
+}
+
+.carousel-inner img {
+    height: 500px;
+    width: 100%;
+}
+
+
+.carousel-inner p {
+    color: whitesmoke;
+    font: 26px bold;
+    text-transform: capitalize;
 }
