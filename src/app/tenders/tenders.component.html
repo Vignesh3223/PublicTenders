@@ -1,166 +1,109 @@
 <section class="sect1">
-    <div class="conatiner">
-        <h1 class="text-center">Public Tenders</h1>
+    <div class="conatiner mt-2 mb-5">
+        <h1 class="text-center mb-2">Public Tenders</h1>
         <hr>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Publish Tender</button>
-        <hr>
-    </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-8">
+                <table class="table table-bordered text-center mt-4 mb-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tender Name</th>
+                            <th scope="col">Opening Date</th>
+                            <th scope="col">Closing Date</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Project Value</th>
 
-</section>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="staticBackdropLabel">New tender</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </tr>
+                    </thead>
+                    <tbody
+                        *ngFor="let tender of tenderslist | filter:selectedCategory  | search:searchText  | sortdate: [sortParam , sortDirection]">
+                        <tr>
+                            <td (click)="viewTender(tender.id)" id="tendername">{{tender.tenderName}}</td>
+                            <td>{{tender.tenderOpeningDate}}</td>
+                            <td>{{tender.tenderClosingDate}}</td>
+                            <td>{{tender.categoryName}}</td>
+                            <td>{{tender.projectValue}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="modal-body">
-                <div class="row text-center">
-                    <form [formGroup]="TenderForm" novalidate>
-
-                        <div class="form-group mb-3">
-                            <mat-form-field appearance="outline" class="example-full-width">
-                                <mat-label>Tender Name</mat-label>
-                                <input type="text" matInput placeholder="Tender Name" formControlName="tendername"
-                                    [ngClass]="{'is-invalid':tendername.errors && (tendername.touched || tendername.dirty)}" />
-                                <mat-error *ngIf="tendername.errors?.required">Required Field</mat-error>
-                                <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
-                                    .(dots)</mat-error> -->
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <mat-form-field appearance="outline" class="example-full-width">
-                                <mat-label>Reference Number</mat-label>
-                                <input type="text" matInput placeholder="Tender Reference Number"
-                                    formControlName="referencenumber"
-                                    [ngClass]="{'is-invalid':referencenumber.errors && (referencenumber.touched || referencenumber.dirty)}" />
-                                <mat-error *ngIf="referencenumber.errors?.required">Required Field</mat-error>
-                                <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
-                                    .(dots)</mat-error> -->
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <mat-form-field appearance="outline" class="example-full-width">
-                                <mat-label>Description</mat-label>
-                                <textarea matInput placeholder="Tender Description" formControlName="description"
-                                    [ngClass]="{'is-invalid':description.errors && (description.touched || description.dirty)}"></textarea>
-                                <mat-error *ngIf="description.errors?.required">Required Field</mat-error>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <mat-form-field appearance="outline" class="example-full-width">
-                                <mat-label>Project Value</mat-label>
-                                <input type="text" matInput placeholder="Project Value" formControlName="projectvalue"
-                                    [ngClass]="{'is-invalid':projectvalue.errors && (projectvalue.touched || projectvalue.dirty)}" />
-                                <mat-error *ngIf="projectvalue.errors?.required">Required Field</mat-error>
-                                <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
-                                    .(dots)</mat-error> -->
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <mat-form-field appearance="outline" class="example-full-width">
-                                <mat-label>Location</mat-label>
-                                <input type="text" matInput placeholder="Location" formControlName="location"
-                                    [ngClass]="{'is-invalid':location.errors && (location.touched || location.dirty)}" />
-                                <mat-error *ngIf="location.errors?.required">Required Field</mat-error>
-                                <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
-                                    .(dots)</mat-error> -->
-                            </mat-form-field>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <mat-form-field appearance="outline" class="example-full-width">
-                                <mat-label>Authority</mat-label>
-                                <input type="text" matInput placeholder="Authority" formControlName="authority"
-                                    [ngClass]="{'is-invalid':authority.errors && (authority.touched || authority.dirty)}" />
-                                <mat-error *ngIf="authority.errors?.required">Required Field</mat-error>
-                                <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
-                                    .(dots)</mat-error> -->
-                            </mat-form-field>
-                        </div>
-
-                        <div class="row text-center mb-5">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Tender Opening Date</label><br>
-                                    <p-calendar [(ngModel)]="opendate" formControlName="tenderopeningdate"
-                                        [ngClass]="{'is-invalid':tenderopeningdate.errors && (tenderopeningdate.touched || tenderopeningdate.dirty)}">
-                                        <ng-template pTemplate="date" let-date>
-                                            <span>{{date.day}}</span>
-                                        </ng-template>
-                                    </p-calendar>
-                                    <!-- <div *ngIf="tenderopeningdate.errors?.required">Required Field</div> -->
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Tender Closing Date</label><br>
-                                    <p-calendar [(ngModel)]="closedate" formControlName="tenderclosingdate"
-                                        [ngClass]="{'is-invalid':tenderclosingdate.errors && (tenderclosingdate.touched || tenderclosingdate.dirty)}">
-                                        <ng-template pTemplate="date" let-date>
-                                            <span>{{date.day}}</span>
-                                        </ng-template>
-                                    </p-calendar>
-                                    <!-- <div *ngIf="tenderclosingdate.errors?.required">Required Field</div> -->
-                                </div>
+            <div class="col-md-3 text-center">
+                <button type="button mt-4" class="btn btn-secondary" routerLink='/publishtenders'>
+                    Publish Tender</button>
+                <hr>
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                                Search by Location / Name
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body d-flex">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Location/Name</mat-label>
+                                    <mat-icon matSuffix>search</mat-icon>
+                                    <input type="text" matInput placeholder="Enter Search Text"
+                                        [(ngModel)]="searchText">
+                                </mat-form-field>
                             </div>
                         </div>
-
-                        <div class="row text-center mb-5">
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label>Project Start Date</label><br>
-                                    <p-calendar [(ngModel)]="startdate" formControlName="projectstartdate"
-                                        [ngClass]="{'is-invalid':projectstartdate.errors && (projectstartdate.touched || projectstartdate.dirty)}">
-                                        <ng-template pTemplate="date" let-date>
-                                            <span>{{date.day}}</span>
-                                        </ng-template>
-                                    </p-calendar>
-                                    <!-- <div *ngIf="projectstartdate.errors?.required">Required Field</div> -->
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <label>Project End Date</label><br>
-                                    <p-calendar [(ngModel)]="enddate" formControlName="projectenddate"
-                                        [ngClass]="{'is-invalid':projectenddate.errors && (projectenddate.touched || projectenddate.dirty)}">
-                                        <ng-template pTemplate="date" let-date>
-                                            <span>{{date.day}}</span>
-                                        </ng-template>
-                                    </p-calendar>
-                                    <!-- <div *ngIf="projectenddate.errors?.required">Required Field</div> -->
-                                </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                aria-controls="flush-collapseTwo">
+                                Sort by Tender Closing Date
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body d-flex">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Sort by Tender Closing Date</mat-label>
+                                    <select class="form-control" matNativeControl (change)="onOptionsSelected($event)"
+                                        id="sort">
+                                        <option value="">Sort by :</option>
+                                        <option value="n-f">Nearest Date</option>
+                                        <option value="f-n">Farest Date</option>
+                                    </select>
+                                </mat-form-field>
                             </div>
                         </div>
-                        <div class="form-group mb-3">
-                            <mat-form-field appearance="outline" class="example-full-width">
-                                <mat-label>Application Fee</mat-label>
-                                <input type="text" matInput placeholder="Application Fee"
-                                    formControlName="applicationfee"
-                                    [ngClass]="{'is-invalid':applicationfee.errors && (applicationfee.touched || applicationfee.dirty)}" />
-                                <mat-error *ngIf="applicationfee.errors?.required">Required Field</mat-error>
-                                <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
-                                    .(dots)</mat-error> -->
-                            </mat-form-field>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                aria-controls="flush-collapseThree">
+                                Filter by Category
+                            </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body d-flex">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Filter by Category</mat-label>
+                                    <mat-select id="filter" [(ngModel)]="selectedCategory">
+                                        <mat-option value="Manufacture">Manufacture</mat-option>
+                                        <mat-option value="Construction">Construction</mat-option>
+                                        <mat-option value="Healthcare">Healthcare</mat-option>
+                                        <mat-option value="Transportation">Transportation</mat-option>
+                                        <mat-option value="Education">Education</mat-option>
+                                        <mat-option value="Environmental">Environmental</mat-option>
+                                        <mat-option value="Communication">Communication</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-
-            <div class="modal-footer justify-content-center">
-                <p-toast position="top-right"></p-toast>
-                <button class="me-3" mat-icon mat-raised-button color="warn" data-bs-dismiss="modal">
-                    Close<mat-icon>clear</mat-icon></button>
-                <button mat-icon mat-raised-button color="primary" (click)="onPost()">
-                    Publish<mat-icon>done_outline</mat-icon></button>
             </div>
         </div>
     </div>
-</div>
+</section>

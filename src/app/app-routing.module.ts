@@ -6,6 +6,8 @@ import { SignupComponent } from './users/signup/signup.component';
 import { CategoryComponent } from './category/category.component';
 import { UsersComponent } from './users/users.component';
 import { TendersComponent } from './tenders/tenders.component';
+import { PublishtendersComponent } from './tenders/publishtenders/publishtenders.component';
+import { ViewtenderComponent } from './tenders/viewtender/viewtender.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,12 @@ const routes: Routes = [
   },
   {
     path: 'tenders', component: TendersComponent
+  },
+  {
+    path: 'publishtenders', component: PublishtendersComponent
+  },
+  {
+    path: 'viewtender/:id', component: ViewtenderComponent
   }
 ];
 

@@ -1,0 +1,17 @@
+.card-body {
+    padding: 10px;
+}
+
+h1 {
+    color: navy;
+}
+
+h3 {
+    color: crimson;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.8;
+}

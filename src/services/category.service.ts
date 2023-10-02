@@ -15,4 +15,5 @@ export class CategoryService {
   getCategories() {
     return this.httpclient.get<Category[]>(this.category);
   }
+  
 }

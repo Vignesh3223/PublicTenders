@@ -1,100 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
+import { Category } from 'src/models/category';
 import { TenderService } from 'src/services/tender.service';
 import { Tenders } from 'src/models/tenders';
+import { CategoryService } from 'src/services/category.service';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { environment } from 'src/environments/envionment';
 
 @Component({
   selector: 'app-tenders',
   templateUrl: './tenders.component.html',
   styleUrls: ['./tenders.component.css']
 })
+
 export class TendersComponent implements OnInit {
 
-  tenderapi = environment.tendersurl;
+  tenderslist: Tenders | any;
 
-  opendate: Date[] | undefined;
-  closedate: Date[] | undefined;
-  startdate: Date[] | undefined;
-  enddate: Date[] | undefined;
+  categorylist: Category | any;
 
-  TenderForm: FormGroup | any;
-  tendername: FormControl | any;
-  referencenumber: FormControl | any;
-  description: FormControl | any;
-  projectvalue: FormControl | any;
-  tenderopeningdate: FormControl | any;
-  tenderclosingdate: FormControl | any;
-  location: FormControl | any;
-  authority: FormControl | any;
-  projectstartdate: FormControl | any;
-  projectenddate: FormControl | any;
-  applicationfee: FormControl | any;
+  tenderId!: number;
 
-  submitted = false;
+  selectedCategory: string | any;
 
-  constructor(
-    private httpclient: HttpClient,
-    private messageService: MessageService,
-    private tenderserv: TenderService,
-    private route: Router
-  ) { }
+  searchText = '';
+
+  sortParam: any;
+  sortDirection: any;
+  optionSelected: any;
+
+  constructor(private tenderserv: TenderService,
+    private categoryserv: CategoryService,
+    private route: Router) { }
 
   ngOnInit(): void {
-    this.tendername = new FormControl('', [Validators.required]);
-    this.referencenumber = new FormControl('', [Validators.required]);
-    this.description = new FormControl('', [Validators.required]);
-    this.projectvalue = new FormControl('', [Validators.required]);
-    this.tenderopeningdate = new FormControl('', [Validators.required]);
-    this.tenderclosingdate = new FormControl('', [Validators.required]);
-    this.location = new FormControl('', [Validators.required]);
-    this.authority = new FormControl('', [Validators.required]);
-    this.projectstartdate = new FormControl('', [Validators.required]);
-    this.projectenddate = new FormControl('', [Validators.required]);
-    this.applicationfee = new FormControl('', [Validators.required]);
-
-    this.TenderForm = new FormGroup({
-      tendername: this.tendername,
-      referencenumber: this.referencenumber,
-      description: this.description,
-      projectvalue: this.projectvalue,
-      tenderopeningdate: this.tenderopeningdate,
-      tenderclosingdate: this.tenderclosingdate,
-      location: this.location,
-      authority: this.authority,
-      projectstartdate: this.projectstartdate,
-      projectenddate: this.projectenddate,
-      applicationfee: this.applicationfee
+    this.categoryserv.getCategories().subscribe((categories) => {
+      const categoryList = categories;
+      this.tenderserv.getTenders().subscribe((tenders) => {
+        this.tenderslist = tenders;
+        this.tenderslist.forEach((tender: any) => {
+          const matchingCategory = categoryList.find((category) => category.categoryId === tender.categoryId);
+          if (matchingCategory) {
+            tender.categoryName = matchingCategory.categoryName;
+          }
+        });
+        console.log(this.tenderslist);
+      });
     });
   }
 
-  showSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Tender Published Successfully' });
+  viewTender(id: number) {
+    this.tenderId = id;
+    this.route.navigate(['viewtender/' + id]);
   }
 
-  showError() {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in all the details' });
+  onOptionsSelected(event: any) {
+    console.log(event.target.value);
+    this.optionSelected = event.target.value;
+    this.sortParam = 'tenderClosingDate';
+    this.sortDirection = 'asc';
+    if (this.optionSelected === 'f-n') {
+      (this.sortParam = 'duedate'), (this.sortDirection = 'desc');
+    }
   }
 
-  onPost() {
-    this.submitted = true;
-    if (this.TenderForm.invalid) {
-      this.showError();
-    }
-    else {
-      this.httpclient.post<Tenders[]>(this.tenderapi, this.TenderForm.value).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.showSuccess();
-          this.TenderForm.reset();
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      })
-    }
-  }
 }

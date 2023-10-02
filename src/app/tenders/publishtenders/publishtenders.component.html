@@ -1,0 +1,130 @@
+<section class="sect1">
+    <div class="container">
+        <h2 class="text-center mt-2">Publish a Tender</h2>
+        <div class="row mt-4 mb-4">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 text-center justify-content-center">
+                <form [formGroup]="TenderForm" novalidate>
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Tender Name</mat-label>
+                            <input type="text" matInput placeholder="Tender Name" formControlName="tendername"
+                                [ngClass]="{'is-invalid':tendername.errors && (tendername.touched || tendername.dirty)}" />
+                            <mat-error *ngIf="tendername.errors?.required">Required Field</mat-error>
+                            <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
+                                .(dots)</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Reference Number</mat-label>
+                            <input type="text" matInput placeholder="Tender Reference Number"
+                                formControlName="referencenumber"
+                                [ngClass]="{'is-invalid':referencenumber.errors && (referencenumber.touched || referencenumber.dirty)}" />
+                            <mat-error *ngIf="referencenumber.errors?.required">Required Field</mat-error>
+                            <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
+                                .(dots)</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput placeholder="Tender Description" formControlName="description"
+                                [ngClass]="{'is-invalid':description.errors && (description.touched || description.dirty)}"></textarea>
+                            <mat-error *ngIf="description.errors?.required">Required Field</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Category</mat-label>
+                            <mat-select formControlName="categoryid" id="categoryid" [(ngModel)]="selectedCategory"
+                                [ngClass]="{'is-invalid':categoryid.errors && (categoryid.touched || categoryid.dirty)}">
+                                <mat-option *ngFor="let category of categorylist" [value]="category.categoryId">
+                                    {{ category.categoryName }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="categoryid.errors?.required">Required Field</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Project Value</mat-label>
+                            <input type="text" matInput placeholder="Project Value" formControlName="projectvalue"
+                                [ngClass]="{'is-invalid':projectvalue.errors && (projectvalue.touched || projectvalue.dirty)}" />
+                            <mat-error *ngIf="projectvalue.errors?.required">Required Field</mat-error>
+                            <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
+                                .(dots)</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Location</mat-label>
+                            <input type="text" matInput placeholder="Location" formControlName="location"
+                                [ngClass]="{'is-invalid':location.errors && (location.touched || location.dirty)}" />
+                            <mat-error *ngIf="location.errors?.required">Required Field</mat-error>
+                            <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
+                                .(dots)</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Authority</mat-label>
+                            <input type="text" matInput placeholder="Authority" formControlName="authority"
+                                [ngClass]="{'is-invalid':authority.errors && (authority.touched || authority.dirty)}" />
+                            <mat-error *ngIf="authority.errors?.required">Required Field</mat-error>
+                            <!-- <mat-error *ngIf="companyname.errors?.pattern">Name must contain only aphabets, spaces and
+                                .(dots)</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Project Start Date</mat-label>
+                            <input matInput [matDatepicker]="picker3" formControlName="projectstartdate"
+                                [ngClass]="{'is-invalid':projectstartdate.errors && (projectstartdate.touched || projectstartdate.dirty)}">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                            <mat-error *ngIf="projectstartdate.errors?.required">Required Field</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Project End Date</mat-label>
+                            <input matInput [matDatepicker]="picker4" formControlName="projectenddate"
+                                [ngClass]="{'is-invalid':projectenddate.errors && (projectenddate.touched || projectenddate.dirty)}">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                            <mat-datepicker #picker4></mat-datepicker>
+                            <mat-error *ngIf="projectenddate.errors?.required">Required Field</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Application Fee</mat-label>
+                            <input type="text" matInput placeholder="Application Fee" formControlName="applicationfee"
+                                [ngClass]="{'is-invalid':applicationfee.errors && (applicationfee.touched || applicationfee.dirty)}" />
+                            <mat-error *ngIf="applicationfee.errors?.required">Required Field</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="justify-content-center">
+                        <p-toast position="top-right"></p-toast>
+                        <button class="me-3" mat-icon mat-raised-button color="warn">
+                            Close<mat-icon>clear</mat-icon></button>
+                        <button mat-icon mat-raised-button color="primary" (click)="onPost()">
+                            Publish<mat-icon>done_outline</mat-icon></button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</section>

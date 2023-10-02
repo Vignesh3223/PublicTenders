@@ -15,20 +15,29 @@ import { CategoryComponent } from './category/category.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { QuotationsComponent } from './quotations/quotations.component';
 import { TenderstakenComponent } from './tenderstaken/tenderstaken.component';
+import { PublishtendersComponent } from './tenders/publishtenders/publishtenders.component';
+import { ViewtenderComponent } from './tenders/viewtender/viewtender.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatCardModule} from '@angular/material/card';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
+import { FooterComponent } from './footer/footer.component';
+import { FilterPipe } from '../shared/filter.pipe';
+import { SearchPipe } from '../shared/search.pipe';
+import { SortdatePipe } from '../shared/sortdate.pipe';
+
+
 
 
 @NgModule({
@@ -42,7 +51,13 @@ import { CalendarModule } from 'primeng/calendar';
     CategoryComponent,
     TendersComponent,
     QuotationsComponent,
-    TenderstakenComponent
+    TenderstakenComponent,
+    PublishtendersComponent,
+    FooterComponent,
+    ViewtenderComponent,
+    FilterPipe,
+    SearchPipe,
+    SortdatePipe
   ],
   imports: [
     BrowserModule,
@@ -59,9 +74,10 @@ import { CalendarModule } from 'primeng/calendar';
     TableModule,
     MatSelectModule,
     ToastModule,
+    CalendarModule,
+    DropdownModule,
     MatDatepickerModule,
-    MatNativeDateModule,
-    CalendarModule
+    MatNativeDateModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
