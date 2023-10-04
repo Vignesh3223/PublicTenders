@@ -1,7 +1,7 @@
 <section class="sect1">
-    <div class="container mb-5">
+    <div class="container-fluid mb-5">
         <div class="row">
-            <div class="col-md-9 mt-5">
+            <div class="col-md-10 mt-5 justify-content-center">
                 <h1>Welcome to eProcurement System</h1>
                 <p>The eProcurement System enables the Tenderers to submit the bids online through this portal.</p>
                 <div id="carouselExampleCaptions" class="carousel slide carousel-fade mt-5" data-bs-ride="carousel">
@@ -85,10 +85,20 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-3 mt-4 text-center">
+            <div class="col-md-2 mt-2 pt-5 pb-5 text-center" id="page2">
+                <ng-container *ngIf="!hide">
+                    <button mat-icon mat-raised-button color="primary" routerLink='/signin'>Login</button>
+                </ng-container>
+                <ng-container *ngIf="hide">
+                    <h2>{{companyname}}</h2>
+                    <a routerLink=''>Edit Profile</a><br>
+                    <button class="mt-3" mat-raised-button color="warn" (click)="logout()">Logout</button>
+                </ng-container>
             </div>
         </div>
-        <div class="row justify-content-center mt-5">
+    </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
@@ -98,7 +108,8 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h3 class="card-title">Officially Approved</h3>
-                                <p class="card-text">We are officially approved and licensed by Government of Tamil Nadu</p>
+                                <p class="card-text">We are officially approved and licensed by Government of Tamil Nadu
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -113,7 +124,8 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h3 class="card-title">Verified Profile</h3>
-                                <p class="card-text">We clearly verify each and every Tenderers before providing the Tenders</p>
+                                <p class="card-text">We clearly verify each and every Tenderers before providing the
+                                    Tenders</p>
                             </div>
                         </div>
                     </div>
@@ -128,7 +140,8 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h3 class="card-title">Certified Service</h3>
-                                <p class="card-text">We are very glad to provide this Service and help the Tamil Nadu Government</p>
+                                <p class="card-text">We are very glad to provide this Service and help the Tamil Nadu
+                                    Government</p>
                             </div>
                         </div>
                     </div>
@@ -145,7 +158,8 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h3 class="card-title">Categories</h3>
-                                <p class="card-text">We target on Major Categories such as Education, Construction, Transportation etc..</p>
+                                <p class="card-text">We target on Major Categories such as Education, Construction,
+                                    Transportation etc..</p>
                             </div>
                         </div>
                     </div>

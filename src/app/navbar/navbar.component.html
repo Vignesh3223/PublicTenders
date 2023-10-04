@@ -14,27 +14,23 @@
           <li class="nav-item">
             <a class="nav-link" routerLink='/category'>Tender Category</a>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown" *ngIf="hide">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               Dropdown
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" routerLink='/users'>Users</a></li>
-              <li><a class="dropdown-item" routerLink='/tenders'>Tenders</a></li>
-              <li><a class="dropdown-item" href="#">Quotations</a></li>
-              <li><a class="dropdown-item" href="#">Tenders Taken</a></li>
+              <div *ngIf="proprieator =='Admin'">
+                <li><a class="dropdown-item" routerLink='/users'>Users</a></li>
+              </div>
+              <div *ngIf="proprieator =='Admin' || proprieator != 'Admin'">
+                <li><a class="dropdown-item" routerLink='/tenders'>Tenders</a></li>
+                <li><a class="dropdown-item" href="#">Quotations</a></li>
+                <li><a class="dropdown-item" href="#">Tenders Taken</a></li>
+              </div>
             </ul>
           </li>
         </ul>
-        <form class="d-flex">
-          <button class="btn btn-primary" type="button" routerLink='/signin'>Login</button>
-          <div *ngIf="auth">
-            <span *ngFor="let user of userlist" class="inline me-3">
-              <mat-icon style="font-size: 26px;">account_circle</mat-icon>{{user.Proprieator}}</span>
-            <button type="button" class="btn btn-danger" (click)="logout">Logout</button>
-          </div>
-        </form>
       </div>
     </div>
   </nav>

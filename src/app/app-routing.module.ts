@@ -8,6 +8,7 @@ import { UsersComponent } from './users/users.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { PublishtendersComponent } from './tenders/publishtenders/publishtenders.component';
 import { ViewtenderComponent } from './tenders/viewtender/viewtender.component';
+import { authGuard } from 'src/shared/auth.guard';
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
     path: 'publishtenders', component: PublishtendersComponent
   },
   {
-    path: 'viewtender/:id', component: ViewtenderComponent
+    path: 'viewTender/:tenderId', component: ViewtenderComponent
   }
 ];
 

@@ -25,3 +25,23 @@
     font: 26px bold;
     text-transform: capitalize;
 }
+
+.row {
+    width: 100%;
+}
+
+.col-md-10 {
+    padding: 0 3em 0 3em;
+}
+
+#page2 {
+    background-color: #64CCC5;
+    color: black;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-weight: 400;
+    font-size: 18px;
+}

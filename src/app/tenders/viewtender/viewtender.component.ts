@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TenderService } from 'src/services/tender.service';
 import { CategoryService } from 'src/services/category.service';
+import { Tenders } from 'src/models/tenders';
 
 @Component({
   selector: 'app-viewtender',
@@ -11,7 +12,7 @@ import { CategoryService } from 'src/services/category.service';
 export class ViewtenderComponent implements OnInit {
 
   tenderId: number | any;
-  tenderdata: any;
+  tenderdata: Tenders | any;
 
   constructor(
     private tenderserv: TenderService,
@@ -19,13 +20,13 @@ export class ViewtenderComponent implements OnInit {
     private actRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.tenderId = this.actRoute.snapshot.params['id'];
+    this.tenderId = this.actRoute.snapshot.params['tenderId'];
 
     this.categoryserv.getCategories().subscribe((categories) => {
       const categoryList = categories;
       this.tenderserv.getTenderbyId(this.tenderId).subscribe((tenders) => {
-        this.tenderdata = tenders;
-        this.tenderdata.forEach((tender: any) => {
+        console.log(tenders);
+        this.tenderdata = tenders.forEach((tender: any) => {
           const matchingCategory = categoryList.find((category) => category.categoryId === tender.categoryId);
           if (matchingCategory) {
             tender.categoryName = matchingCategory.categoryName;
@@ -35,5 +36,4 @@ export class ViewtenderComponent implements OnInit {
       });
     });
   }
-
 }

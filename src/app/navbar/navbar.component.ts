@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/services/user.service';
+import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,18 +10,21 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  userlist: any;
-  
-  hide!: boolean;
+  public proprieator: string | any;
 
-  auth: boolean = false;
+  userlist: any;
+
+  hide!: boolean;
 
   token = localStorage.getItem('token');
 
-  constructor(private userserv: UserService, private route: Router) { }
+  constructor(
+    private userserv: UserService,
+    private route: Router,
+    private authserv: AuthService) { }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token')
+    const token = this.authserv.getToken();
     if (token) {
       this.hide = true;
     }
@@ -28,15 +32,9 @@ export class NavbarComponent implements OnInit {
       this.hide = false;
     }
 
-    // this.userserv.getActiveUser().subscribe(
-    //   (res) => {
-    //     this.userlist = res;
-    //     console.log(this.userlist);
-    //   });
+    this.proprieator = localStorage.getItem('proprieator');
+    console.log(this.proprieator);
   }
-  logout() {
-    localStorage.removeItem('token');
-    this.userserv.validateAuth(false);
-    this.route.navigate(["/"]);
-  }
+
+
 }

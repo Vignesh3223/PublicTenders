@@ -1,8 +1,8 @@
 <section class="sect1">
     <div class="container">
         <h1 class="text-center mt-3">Tender Details</h1>
-        <div class="card mt-2 mb-4" *ngFor="let ten of tenderdata">
-            <div class="card-body">
+        <div class="card mt-2 mb-4" >
+            <div class="card-body" *ngFor="let ten of tenderdata">
                 <div class="row d-flex">
                     <div class="col-md-8 text-start">
                         <h1>{{ten.tenderName}}</h1>
@@ -16,7 +16,7 @@
                     <p>Opening Date : {{ten.tenderOpeningDate}}</p>
                     <p>Closing Date :{{ten.tenderClosingDate}}</p>
                     <p>Category : {{ten.categoryName}}</p>
-                    <p>Project Value : {{ten.projectValue}}</p>
+                    <p>Project Value : {{ten.projectValue | currency : "INR" : "symbol" : "3.0"}}</p>
                     <p>Project Start Date : {{ten.projectStartDate}}</p>
                     <p>Project End Date : {{ten.projectEndDate}}</p>
                     <p>Location : {{ten.location}}</p>

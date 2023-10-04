@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/envionment';
 import { Users } from 'src/models/users';
 import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,22 +12,8 @@ export class UserService {
 
   users = environment.userurl;
 
-  currentuser = environment.loginurl;
-
-  public authSubject = new Subject<boolean>;
-  validateAuth(state: boolean) {
-    this.authSubject.next(state);
-  }
-
-  status?: boolean;
-
-  getAuthStatus() {
-    this.authSubject.subscribe(
-      res => {
-        this.status = res;
-      });
-    return this.status;
-  }
+  private fullName = new BehaviorSubject<string>("");
+  private role = new BehaviorSubject<string>("");
 
   constructor(private httpclient: HttpClient) { }
 
@@ -34,11 +21,20 @@ export class UserService {
     return this.httpclient.get<Users[]>(this.users);
   }
 
-  getToken(){
-    return localStorage.getItem('token');
+  public getRole() {
+    return this.role.asObservable();
   }
 
-  getActiveUser() {
-    return this.httpclient.get<Users[]>(this.currentuser);
+  public setRole(role: string) {
+    this.role.next(role);
   }
+
+  public getFullName() {
+    return this.fullName.asObservable();
+  }
+
+  public setFullName(name: string) {
+    this.fullName.next(name);
+  }
+
 }

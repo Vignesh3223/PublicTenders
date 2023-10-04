@@ -3,8 +3,7 @@
         <h1 class="text-center mb-2">Public Tenders</h1>
         <hr>
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-8">
+            <div class="col-md-9 justify-content-center">
                 <table class="table table-bordered text-center mt-4 mb-3">
                     <thead>
                         <tr>
@@ -13,16 +12,25 @@
                             <th scope="col">Closing Date</th>
                             <th scope="col">Category</th>
                             <th scope="col">Project Value</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody
                         *ngFor="let tender of tenderslist | filter:selectedCategory  | search:searchText  | sortdate: [sortParam , sortDirection]">
                         <tr>
-                            <td (click)="viewTender(tender.id)" id="tendername">{{tender.tenderName}}</td>
+                            <td (click)="viewTender(tender.tenderId)" id="tendername">{{tender.tenderName}}</td>
                             <td>{{tender.tenderOpeningDate}}</td>
                             <td>{{tender.tenderClosingDate}}</td>
                             <td>{{tender.categoryName}}</td>
-                            <td>{{tender.projectValue}}</td>
+                            <td>{{tender.projectValue | currency : "INR" : "symbol" : "3.0"}}</td>
+                            <div *ngIf="proprieator=='Admin'">
+                                <td><button class="btn btn-warning">Edit</button></td>
+                            </div>
+                            <div *ngIf="proprieator!='Admin'">
+                                <td><button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop" (click)="GetDetails(tender)">Quote</button>
+                                </td>
+                            </div>
                         </tr>
                     </tbody>
                 </table>
@@ -106,3 +114,117 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="staticBackdropLabel">Quote Tender</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="QuoteForm" novalidate>
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>User ID</mat-label>
+                            <input type="text" matInput formControlName="UserId">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Company Name</mat-label>
+                            <input type="text" matInput formControlName="CompanyName">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Proprieator</mat-label>
+                            <input type="text" matInput formControlName="Proprieator">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Tender Id</mat-label>
+                            <input type="text" matInput formControlName="TenderId">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Tender Name</mat-label>
+                            <input type="text" matInput formControlName="TenderName">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Project Value</mat-label>
+                            <input type="text" matInput formControlName="ProjectValue">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Location</mat-label>
+                            <input type="text" matInput formControlName="Location">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Authority</mat-label>
+                            <input type="text" matInput formControlName="Authority">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>ProjectStartDate</mat-label>
+                            <input type="text" matInput formControlName="ProjectStartDate">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>ProjectEndDate</mat-label>
+                            <input type="text" matInput formControlName="ProjectEndDate">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3 d-flex">
+                        <mat-form-field appearance="outline" class="example-full-width me-3">
+                            <mat-label>Application Fee</mat-label>
+                            <input type="text" matInput [(ngModel)]="ApplicationFee" formControlName="ApplicationFee">
+                        </mat-form-field>
+                        <p-toast position="top-right"></p-toast>
+                        <button class="mt-2" mat-raised-button color="accent" [hidden]="paymentButtonHidden"
+                            (click)="makePayment()">Pay</button>
+                        <div *ngIf="paymentSuccess" class="mt-2"><mat-icon style="color: green;">done_outline</mat-icon>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>QuoteAmount</mat-label>
+                            <input type="text" matInput formControlName="QuoteAmount"
+                                [ngClass]="{'is-invalid':QuoteAmount.errors && (QuoteAmount.touched || QuoteAmount.dirty)}" />
+                            <mat-error *ngIf="QuoteAmount.errors?.required">Required Field</mat-error>
+                            <mat-error *ngIf="QuoteAmount.errors?.pattern">Enter a valid Amount</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="text-center">
+                        <p-toast position="top-right"></p-toast>
+                        <button class="me-3" mat-icon mat-raised-button color="warn"
+                            data-bs-dismiss="modal">Close</button>
+                        <button mat-icon mat-raised-button color="primary" (click)="onQuote()"
+                            data-bs-dismiss="modal">Quote</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

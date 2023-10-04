@@ -9,5 +9,7 @@ export const environment = {
     //currentuserurl
     currentuserurl:"https://localhost:44372/api/Login/gettoken",
     //tendersurl
-    tendersurl:"https://localhost:44372/api/Tenders"
+    tendersurl:"https://localhost:44372/api/Tenders",
+    //quotationurl
+    quotationurl:"https://localhost:44372/api/Quotations"
 }

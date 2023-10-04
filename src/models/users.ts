@@ -1,14 +1,14 @@
 export interface Users {
-    companyname:string;
+    companyName:string;
     proprieator:string;
     email:string;
     address:string;
-    contactnumber:number;
-    companysector:string;
-    establisheddate:string;
+    contactNumber:number;
+    companySector:string;
+    establishedDate:string;
     gstin:string;
     crn:number;
     password:string;
     token:string;
-    //profilepic:;
+    //profilePic:;
 }

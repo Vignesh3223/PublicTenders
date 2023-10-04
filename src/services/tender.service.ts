@@ -17,7 +17,11 @@ export class TenderService {
   }
 
   getTenderbyId(id: number) {
-    return this.httpclient.get<Tenders[]>(this.tenders + '?tenderId=' + id)
+    return this.httpclient.get<Tenders[]>(this.tenders + '/' + id)
+  }
+
+  postTender(newtender: Tenders) {
+    return this.httpclient.post<Tenders[]>(this.tenders, newtender)
   }
 
 }

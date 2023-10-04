@@ -1,15 +1,15 @@
 export interface Tenders {
-    tenderid: number;
-    tendername: string;
+    tenderId: number;
+    tenderName: string;
     referencenumber: string;
     description: string;
-    categoryid: number;
-    projectvalue: number;
-    tenderopeningdate: Date;
-    tenderclosingdate: Date;
+    categoryId: number;
+    projectValue: number;
+    tenderOpeningDate: Date;
+    tenderClosingDate: Date;
     location: string;
     authority: string;
-    projectstartdate: string;
-    projectenddate: string;
-    applicationfee: number;
+    projectStartDate: string;
+    projectEndDate: string;
+    applicationFee: number;
 }

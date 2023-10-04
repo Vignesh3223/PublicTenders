@@ -90,7 +90,7 @@ export class PublishtendersComponent implements OnInit {
       this.showError();
     }
     else {
-      this.httpclient.post<Tenders[]>(this.tenderapi, this.TenderForm.value).subscribe({
+      this.tenderserv.postTender(this.TenderForm.value).subscribe({
         next: (res) => {
           console.log(res);
           this.showSuccess();

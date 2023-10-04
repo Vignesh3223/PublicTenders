@@ -5,8 +5,8 @@ import { environment } from 'src/environments/envionment';
 import { UserService } from 'src/services/user.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { Users } from 'src/models/users';
 import { Login } from 'src/models/login';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -31,7 +31,8 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private httpclient: HttpClient,
     private userService: UserService,
-    private messageService: MessageService
+    private authservice: AuthService,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -72,11 +73,26 @@ export class SigninComponent implements OnInit {
       this.showError();
     }
     else {
-      var token = this.userService.getToken();
-      //localStorage.setItem('token');
+
       this.httpclient.post<Login>(this.loginapi, this.LoginForm.value).subscribe({
         next: (res) => {
           console.log(res);
+          var user = `${res.userid}`;
+          var role = `${res.RoleId}`;
+          var token = res.token;
+          var companyname = res.companyname;
+          var email = res.Email;
+          var prop = res.proprieator;
+          localStorage.setItem('token', token);
+          localStorage.setItem('role', role);
+          localStorage.setItem('user', user);
+          localStorage.setItem('cname', companyname);
+          localStorage.setItem('email', email);
+          localStorage.setItem('proprieator', prop);
+          this.authservice.storeToken(res.token);
+          const payload = this.authservice.decryptToken();
+          this.userService.setFullName(payload.name);
+          this.userService.setRole(payload.role);
           this.showSuccess();
           this.LoginForm.reset();
           setTimeout(() => { this.router.navigate(['']); }, 1000);
@@ -86,7 +102,6 @@ export class SigninComponent implements OnInit {
           this.showUserError();
         }
       });
-
     }
   }
 }

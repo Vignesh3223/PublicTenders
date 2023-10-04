@@ -1,13 +1,14 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { Inject } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { AuthService } from 'src/services/auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const token = localStorage.getItem('token');
   const router = Inject(Router);
+  const authservice = Inject(AuthService);
   const alertservice = Inject(MessageService);
 
-  if (token) {
+  if (authservice.isLoggedIn()) {
     return true;
   }
   else {

@@ -7,3 +7,12 @@
     font-weight: 400;
     color: orange;
 }
+
+table {
+    margin: 0 auto 0 auto;
+    width: 90%;
+}
+
+.example-full-width {
+    width: 100%;
+}
