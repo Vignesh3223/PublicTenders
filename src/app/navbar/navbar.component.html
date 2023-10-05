@@ -36,7 +36,9 @@
             <button mat-icon mat-raised-button color="primary" routerLink='/signin'>Login</button>
           </ng-container>
           <ng-container *ngIf="hide">
-            <div class="dropdown justify-content-center">
+            <div class="dropdown justify-content-center d-flex">
+              <img src="{{'https://localhost:44372/' + profile}}" class="rounded-circle me-2"
+                style="width: 50px;height: 50px;">
               <h2 class="dropdown-toggle pt-2" href="#" id="userdropdown" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">{{companyname}}</h2>
               <ul class="dropdown-menu" aria-labelledby="userdropdown">

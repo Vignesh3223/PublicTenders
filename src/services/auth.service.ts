@@ -32,16 +32,4 @@ export class AuthService {
     return decodedToken;
   }
 
-  getUserName() {
-    if (this.userPayload) {
-      return this.userPayload.name;
-    }
-  }
-
-  getRole() {
-    if (this.userPayload) {
-      return this.userPayload.role
-    }
-  }
-
 }

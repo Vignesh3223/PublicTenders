@@ -1,0 +1,24 @@
+<section class="sec1">
+    <div class="container mt-3 mb-5">
+        <div class="card">
+            <div class="card-body" *ngFor="let user of userdata">
+                <div class="col-md-7">
+                    <h1>{{user.companyName}}</h1>
+                    <span>
+                        Proprieator: {{user.proprieator}}
+                        Email: {{user.email}}
+                        Address: {{user.address}}
+                        Conatct (Public Relationship Officer): {{user.contactNumber}}
+                        Established Date: {{user.establishedDate}}
+                        Company Sector: {{user.companySector}}
+                        GSTIN: {{user.gstin}}
+                        Company Registration Number: {{user.crn}}
+                    </span>
+                </div>
+                <div class="col-md-5 justify-content-center">
+                    <img src="{{'https://localhost:44372/' + user.profilePic}}" alt="profilepic">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

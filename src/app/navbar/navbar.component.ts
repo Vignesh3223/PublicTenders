@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
 
   public companyname: string | any;
   public proprieator: string | any;
+  public profile: string | any;
 
   userlist: any;
 
@@ -35,6 +36,7 @@ export class NavbarComponent implements OnInit {
 
     this.companyname = localStorage.getItem('cname');
     this.proprieator = localStorage.getItem('proprieator');
+    this.profile = localStorage.getItem('profile');
   }
 
   logout() {

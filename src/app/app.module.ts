@@ -38,6 +38,7 @@ import { SearchPipe } from '../shared/search.pipe';
 import { SortdatePipe } from '../shared/sortdate.pipe';
 import { ViewqoutationsComponent } from './quotations/viewqoutations/viewqoutations.component';
 import { UploadComponent } from './upload/upload.component';
+import { ViewuserComponent } from './users/viewuser/viewuser.component';
 
 
 
@@ -61,7 +62,8 @@ import { UploadComponent } from './upload/upload.component';
     SearchPipe,
     SortdatePipe,
     ViewqoutationsComponent,
-    UploadComponent
+    UploadComponent,
+    ViewuserComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { Quotation } from 'src/models/quotation';
 import { QuotationService } from 'src/services/quotation.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-quotations',
   templateUrl: './quotations.component.html',
@@ -18,6 +19,7 @@ export class QuotationsComponent implements OnInit {
   quotes: Quotation | any;
 
   public owner: string | any;
+  public company: string | any;
 
   tenderId!: number;
 
@@ -30,6 +32,7 @@ export class QuotationsComponent implements OnInit {
   ngOnInit(): void {
 
     this.owner = localStorage.getItem('proprieator');
+    this.company = localStorage.getItem('cname');
 
     this.categoryserv.getCategories().subscribe((categories) => {
       const categoryList = categories;
@@ -46,7 +49,7 @@ export class QuotationsComponent implements OnInit {
 
     this.quotservice.getquotations().subscribe(
       (res) => {
-        this.quotes = res;
+        this.quotes = res.filter(quot => quot.companyName === this.company && quot.proprieator === this.owner);
       });
   }
 

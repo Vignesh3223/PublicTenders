@@ -8,26 +8,17 @@
           <th scope="col">Company Name</th>
           <th scope="col">Proprieator</th>
           <th scope="col">Email</th>
-          <th scope="col">Address</th>
-          <th scope="col">Contact</th>
           <th scope="col">Sector</th>
-          <th scope="col">Estd</th>
-          <th scope="col">GSTIN</th>
-          <th scope="col">CRN</th>
         </tr>
       </thead>
       <tbody *ngFor="let user of userlist">
         <tr>
-          <td><img src="{{'https://localhost:44372/' + user.profilePic}}" alt="profilepic" style="width:75px;height: 75px;"></td>
-          <td>{{user.companyName}}</td>
+          <td><img src="{{'https://localhost:44372/' + user.profilePic}}" alt="profilepic"
+              style="width:75px;height: 75px;"></td>
+          <td (click)="viewUser(user.UserId)">{{user.companyName}}</td>
           <td>{{user.proprieator}}</td>
           <td>{{user.email}}</td>
-          <td>{{user.address}}</td>
-          <td>{{user.contactNumber}}</td>
           <td>{{user.companySector}}</td>
-          <td>{{user.establishedDate}}</td>
-          <td>{{user.gstin}}</td>
-          <td>{{user.crn}}</td>
         </tr>
       </tbody>
     </table>

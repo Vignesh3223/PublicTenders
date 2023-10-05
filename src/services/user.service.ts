@@ -18,23 +18,11 @@ export class UserService {
   constructor(private httpclient: HttpClient) { }
 
   getUser() {
-    return this.httpclient.get<Users[]>(this.users);
+    return this.httpclient.get<Users[]>(this.users + '/' + 'GetUsers');
   }
 
-  public getRole() {
-    return this.role.asObservable();
-  }
-
-  public setRole(role: string) {
-    this.role.next(role);
-  }
-
-  public getFullName() {
-    return this.fullName.asObservable();
-  }
-
-  public setFullName(name: string) {
-    this.fullName.next(name);
+  getUserbyId(id: number) {
+    return this.httpclient.get<Users[]>(this.users + '/' + 'GetUser' + '/' + id);
   }
 
 }

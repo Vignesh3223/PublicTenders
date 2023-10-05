@@ -119,7 +119,10 @@
                     </mat-form-field>
                 </div>
 
-                <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+                <div class="form-group mb-5">
+                    <label class="pb-2">Choose Profile</label>
+                    <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+                </div>
 
                 <div class="form-group text-center">
                     <p-toast position="top-right"></p-toast>

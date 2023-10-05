@@ -7,4 +7,5 @@ export interface Login {
     userid: number;
     proprieator: string;
     establishedDate: string;
+    profilePic: string;
 }

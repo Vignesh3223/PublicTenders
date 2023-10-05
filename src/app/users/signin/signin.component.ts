@@ -6,7 +6,6 @@ import { UserService } from 'src/services/user.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { Login } from 'src/models/login';
-import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -31,8 +30,7 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private httpclient: HttpClient,
     private userService: UserService,
-    private authservice: AuthService,
-    private messageService: MessageService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -84,6 +82,7 @@ export class SigninComponent implements OnInit {
           var email = res.Email;
           var prop = res.proprieator;
           var estd = res.establishedDate
+          var profile = res.profilePic;
           localStorage.setItem('token', token);
           localStorage.setItem('role', role);
           localStorage.setItem('user', user);
@@ -91,10 +90,7 @@ export class SigninComponent implements OnInit {
           localStorage.setItem('email', email);
           localStorage.setItem('proprieator', prop);
           localStorage.setItem('establishedDate', estd);
-          this.authservice.storeToken(res.token);
-          const payload = this.authservice.decryptToken();
-          this.userService.setFullName(payload.name);
-          this.userService.setRole(payload.role);
+          localStorage.setItem('profile', profile);
           this.showSuccess();
           this.LoginForm.reset();
           setTimeout(() => { this.router.navigate(['']); }, 1000);

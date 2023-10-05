@@ -17,7 +17,7 @@ export class ViewtenderComponent implements OnInit {
   constructor(
     private tenderserv: TenderService,
     private categoryserv: CategoryService,
-    private actRoute: ActivatedRoute,) { }
+    private actRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.tenderId = this.actRoute.snapshot.params['tenderId'];
@@ -25,8 +25,8 @@ export class ViewtenderComponent implements OnInit {
     this.categoryserv.getCategories().subscribe((categories) => {
       const categoryList = categories;
       this.tenderserv.getTenderbyId(this.tenderId).subscribe((tenders) => {
-        console.log(tenders);
-        this.tenderdata = tenders.forEach((tender: any) => {
+        this.tenderdata = Array.isArray(tenders) ? tenders : [tenders]; 
+        this.tenderdata.forEach((tender: any) => {
           const matchingCategory = categoryList.find((category) => category.categoryId === tender.categoryId);
           if (matchingCategory) {
             tender.categoryName = matchingCategory.categoryName;
@@ -34,5 +34,7 @@ export class ViewtenderComponent implements OnInit {
         });
       });
     });
+    
+
   }
 }

@@ -91,9 +91,8 @@ export class SignupComponent implements OnInit {
     }
     
     else {
-      this.httpclient.post<Users>(this.userapi, this.RegisterForm.value).subscribe({
+      this.httpclient.post<Users>(this.userapi + '/' + 'PostUser', this.RegisterForm.value).subscribe({
         next: (res) => {
-          console.log(res);
           this.showSuccess();
           this.RegisterForm.reset();
           setTimeout(() => { this.router.navigate(['/signin']); }, 1000);

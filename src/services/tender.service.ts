@@ -13,15 +13,15 @@ export class TenderService {
   constructor(private httpclient: HttpClient) { }
 
   getTenders() {
-    return this.httpclient.get<Tenders[]>(this.tenders);
+    return this.httpclient.get<Tenders[]>(this.tenders+ '/' + 'GetTenders');
   }
 
   getTenderbyId(id: number) {
-    return this.httpclient.get<Tenders[]>(this.tenders + '/' + id)
+    return this.httpclient.get<Tenders[]>(this.tenders  + '/' + 'GetTender' + '/' + id);
   }
 
   postTender(newtender: Tenders) {
-    return this.httpclient.post<Tenders[]>(this.tenders, newtender)
+    return this.httpclient.post<Tenders[]>(this.tenders + '/' + 'PostTender', newtender);
   }
 
 }
