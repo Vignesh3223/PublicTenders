@@ -3,6 +3,7 @@ export interface Quotation {
     userId: number;
     companyName: string;
     proprieator: string;
+    establishedDate: string;
     tenderId: number;
     tenderName: string;
     projectValue: number;
@@ -10,6 +11,7 @@ export interface Quotation {
     authority: string;
     projectStartDate: Date;
     projectEndDate: Date;
-    applicationFee:number;
+    applicationFee: number;
     quoteAmount: number;
+
 }

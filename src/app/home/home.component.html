@@ -85,15 +85,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-2 mt-2 pt-5 pb-5 text-center" id="page2">
-                <ng-container *ngIf="!hide">
-                    <button mat-icon mat-raised-button color="primary" routerLink='/signin'>Login</button>
-                </ng-container>
-                <ng-container *ngIf="hide">
-                    <h2>{{companyname}}</h2>
-                    <a routerLink=''>Edit Profile</a><br>
-                    <button class="mt-3" mat-raised-button color="warn" (click)="logout()">Logout</button>
-                </ng-container>
+            <div class="col-md-2 mt-2 text-center">
             </div>
         </div>
     </div>
@@ -183,3 +175,4 @@
         </div>
     </div>
 </section>
+<app-footer></app-footer>

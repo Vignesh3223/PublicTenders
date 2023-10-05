@@ -32,7 +32,6 @@ export class ViewtenderComponent implements OnInit {
             tender.categoryName = matchingCategory.categoryName;
           }
         });
-        console.log(this.tenderdata);
       });
     });
   }

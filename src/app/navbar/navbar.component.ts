@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+  public companyname: string | any;
   public proprieator: string | any;
 
   userlist: any;
@@ -32,9 +33,14 @@ export class NavbarComponent implements OnInit {
       this.hide = false;
     }
 
+    this.companyname = localStorage.getItem('cname');
     this.proprieator = localStorage.getItem('proprieator');
-    console.log(this.proprieator);
   }
 
-
+  logout() {
+    localStorage.clear();
+    console.log('logged out');
+    this.route.navigate(["/"]);
+    this.ngOnInit();
+  }
 }

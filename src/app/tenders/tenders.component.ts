@@ -6,7 +6,6 @@ import { Tenders } from 'src/models/tenders';
 import { CategoryService } from 'src/services/category.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Quotation } from 'src/models/quotation';
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/envionment';
 import { QuotationService } from 'src/services/quotation.service';
@@ -46,6 +45,7 @@ export class TendersComponent implements OnInit {
   userid: number | any;
   company: string | any;
   owner: string | any;
+  estdDate: string | any;
   tenderid: number | any;
   tendname: string | any;
   provalue: number | any;
@@ -69,6 +69,7 @@ export class TendersComponent implements OnInit {
   UserId: FormControl | any;
   CompanyName: FormControl | any;
   Proprieator: FormControl | any;
+  establishedDate: FormControl | any;
   TenderId: FormControl | any;
   TenderName: FormControl | any;
   ProjectValue: FormControl | any;
@@ -90,7 +91,6 @@ export class TendersComponent implements OnInit {
         console.log(stripeToken);
         this.paymentButtonHidden = true;
         this.paymentSuccess = true;
-        console.log('Payment Success');
       }
     });
     paymentHandler.open({
@@ -112,7 +112,6 @@ export class TendersComponent implements OnInit {
           locale: 'auto',
           token: function (stripeToken: any) {
             console.log(stripeToken);
-            console.log('payment failed');
           }
         });
       }
@@ -125,6 +124,7 @@ export class TendersComponent implements OnInit {
     this.UserId = new FormControl('');
     this.CompanyName = new FormControl('');
     this.Proprieator = new FormControl('');
+    this.establishedDate = new FormControl('');
     this.TenderId = new FormControl('');
     this.TenderName = new FormControl('');
     this.ProjectValue = new FormControl('');
@@ -142,6 +142,7 @@ export class TendersComponent implements OnInit {
       UserId: this.UserId,
       CompanyName: this.CompanyName,
       Proprieator: this.Proprieator,
+      establishedDate: this.establishedDate,
       TenderId: this.TenderId,
       TenderName: this.TenderName,
       ProjectValue: this.ProjectValue,
@@ -204,11 +205,13 @@ export class TendersComponent implements OnInit {
     this.userid = localStorage.getItem('user');
     this.company = localStorage.getItem('cname');
     this.owner = localStorage.getItem('proprieator');
+    this.estdDate = localStorage.getItem('establishedDate');
 
     const userDetails = {
       UserId: this.userid,
       CompanyName: this.company,
       Proprieator: this.owner,
+      establishedDate: this.estdDate
     };
 
     this.tenderid = tender.tenderId;

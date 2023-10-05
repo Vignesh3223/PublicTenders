@@ -1,1 +1,63 @@
-<p>quotations works!</p>
+<section class="sect1">
+    <div class="container mt-5 mb-5" *ngIf="owner=='Admin';else users">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <table class="table table-bordered text-center mt-4 mb-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tender Name</th>
+                            <th scope="col">Opening Date</th>
+                            <th scope="col">Closing Date</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Project Value</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let tender of tenderlist">
+                        <tr>
+                            <td (click)="viewQuotations(tender.tenderId)" id="tendername">{{tender.tenderName}}</td>
+                            <td>{{tender.tenderOpeningDate}}</td>
+                            <td>{{tender.tenderClosingDate}}</td>
+                            <td>{{tender.categoryName}}</td>
+                            <td>{{tender.projectValue | currency : "INR" : "symbol" : "3.0"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <ng-template #users>
+        <div class="container mt-2 mb-5">
+            <h1 class="text-center mt-4 mb-2">Quotations</h1>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <table class="table table-bordered text-center mt-4 mb-3">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tender Name</th>
+                                <th scope="col">Project Start Date</th>
+                                <th scope="col">Project End Date</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Authority</th>
+                                <th scope="col">Quote Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let quot of quotes">
+                            <tr>
+                                <td>{{quot.tenderName}}</td>
+                                <td>{{quot.projectStartDate}}</td>
+                                <td>{{quot.projectEndDate}}</td>
+                                <td>{{quot.location}}</td>
+                                <td>{{quot.authority}}</td>
+                                <td>{{quot.quoteAmount | currency : "INR" : "symbol" : "3.0"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </ng-template>
+</section>

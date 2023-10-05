@@ -13,10 +13,14 @@ export class QuotationService {
   constructor(private httpclient: HttpClient) { }
 
   getquotations() {
-    return this.httpclient.get<Quotation[]>(this.quotations);
+    return this.httpclient.get<Quotation[]>(this.quotations + '/' + 'GetQuotations');
   }
 
   postquotations(newquote: Quotation) {
-    return this.httpclient.post<Quotation[]>(this.quotations, newquote)
+    return this.httpclient.post<Quotation[]>(this.quotations + '/' + 'PostQuotation', newquote)
+  }
+
+  getquotationsbytender(id: number) {
+    return this.httpclient.get<Quotation[]>(this.quotations + '/' + 'GetQuote' + '/' + id)
   }
 }

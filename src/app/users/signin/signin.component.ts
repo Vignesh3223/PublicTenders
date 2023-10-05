@@ -83,12 +83,14 @@ export class SigninComponent implements OnInit {
           var companyname = res.companyname;
           var email = res.Email;
           var prop = res.proprieator;
+          var estd = res.establishedDate
           localStorage.setItem('token', token);
           localStorage.setItem('role', role);
           localStorage.setItem('user', user);
           localStorage.setItem('cname', companyname);
           localStorage.setItem('email', email);
           localStorage.setItem('proprieator', prop);
+          localStorage.setItem('establishedDate', estd);
           this.authservice.storeToken(res.token);
           const payload = this.authservice.decryptToken();
           this.userService.setFullName(payload.name);

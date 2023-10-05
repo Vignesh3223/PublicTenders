@@ -8,7 +8,8 @@ import { UsersComponent } from './users/users.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { PublishtendersComponent } from './tenders/publishtenders/publishtenders.component';
 import { ViewtenderComponent } from './tenders/viewtender/viewtender.component';
-import { authGuard } from 'src/shared/auth.guard';
+import { QuotationsComponent } from './quotations/quotations.component';
+import { ViewqoutationsComponent } from './quotations/viewqoutations/viewqoutations.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,14 @@ const routes: Routes = [
   },
   {
     path: 'viewTender/:tenderId', component: ViewtenderComponent
+  },
+  {
+    path: 'quotations', component: QuotationsComponent
+  },
+  {
+    path: 'viewQuotations/:tenderId', component: ViewqoutationsComponent
   }
+
 ];
 
 @NgModule({

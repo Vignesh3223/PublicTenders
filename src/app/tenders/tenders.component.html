@@ -147,6 +147,13 @@
 
                     <div class="form-group mb-3">
                         <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Company Established Date</mat-label>
+                            <input type="text" matInput formControlName="establishedDate">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>Tender Id</mat-label>
                             <input type="text" matInput formControlName="TenderId">
                         </mat-form-field>
@@ -220,8 +227,7 @@
                         <p-toast position="top-right"></p-toast>
                         <button class="me-3" mat-icon mat-raised-button color="warn"
                             data-bs-dismiss="modal">Close</button>
-                        <button mat-icon mat-raised-button color="primary" (click)="onQuote()"
-                            data-bs-dismiss="modal">Quote</button>
+                        <button mat-icon mat-raised-button color="primary" (click)="onQuote()">Quote</button>
                     </div>
                 </form>
             </div>

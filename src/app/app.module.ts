@@ -36,6 +36,8 @@ import { FooterComponent } from './footer/footer.component';
 import { FilterPipe } from '../shared/filter.pipe';
 import { SearchPipe } from '../shared/search.pipe';
 import { SortdatePipe } from '../shared/sortdate.pipe';
+import { ViewqoutationsComponent } from './quotations/viewqoutations/viewqoutations.component';
+import { UploadComponent } from './upload/upload.component';
 
 
 
@@ -57,7 +59,9 @@ import { SortdatePipe } from '../shared/sortdate.pipe';
     ViewtenderComponent,
     FilterPipe,
     SearchPipe,
-    SortdatePipe
+    SortdatePipe,
+    ViewqoutationsComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

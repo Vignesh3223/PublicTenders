@@ -10,5 +10,5 @@ export interface Users {
     crn:number;
     password:string;
     token:string;
-    //profilePic:;
+    profilePic:string;
 }

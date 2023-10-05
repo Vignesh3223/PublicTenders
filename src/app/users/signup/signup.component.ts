@@ -16,6 +16,8 @@ export class SignupComponent implements OnInit {
 
   hide = true;
 
+  public response!: { dbPath: '' };
+
   userapi = environment.userurl;
 
   RegisterForm: FormGroup | any;
@@ -29,7 +31,7 @@ export class SignupComponent implements OnInit {
   gstin: FormControl | any;
   crn: FormControl | any;
   password: FormControl | any;
-  //profilepic: FormControl | any;
+  profilePic: FormControl | any;
 
   logged: boolean | any;
   submitted = false;
@@ -51,7 +53,7 @@ export class SignupComponent implements OnInit {
     this.gstin = new FormControl('', [Validators.required, Validators.pattern('[A-za-z0-9]*')]);
     this.crn = new FormControl('', [Validators.required, Validators.pattern('[0-9]*')]);
     this.password = new FormControl('', [Validators.required, Validators.pattern('[A-Za-z0-9]*')]);
-    //this.profilepic = new FormControl('');
+    this.profilePic = new FormControl('');
 
     this.RegisterForm = new FormGroup({
       companyname: this.companyname,
@@ -64,7 +66,7 @@ export class SignupComponent implements OnInit {
       gstin: this.gstin,
       crn: this.crn,
       password: this.password,
-      //profilepic: this.profilepic
+      profilePic: this.profilePic
     });
   }
 
@@ -76,11 +78,18 @@ export class SignupComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in all the details' });
   }
 
+  public uploadFinished = (event:any) => {
+    this.response = event;
+    this.profilePic.setValue(this.response.dbPath);
+  }
+
   onRegister() {
     this.submitted = true;
+    console.log(this.RegisterForm.value)
     if (this.RegisterForm.invalid) {
       this.showError();
     }
+    
     else {
       this.httpclient.post<Users>(this.userapi, this.RegisterForm.value).subscribe({
         next: (res) => {
