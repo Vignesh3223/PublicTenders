@@ -85,7 +85,15 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-2 mt-2 text-center">
+            <div class="col-md-2" id="adblock">
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item" *ngFor="let ads of adslist let i = index"
+                            [ngClass]="{'active': i == 0 }">
+                            <img src="{{'https://localhost:44372/' + ads.adPoster}}" class="d-block w-100" alt="Ads">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

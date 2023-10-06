@@ -11,6 +11,8 @@ import { ViewtenderComponent } from './tenders/viewtender/viewtender.component';
 import { QuotationsComponent } from './quotations/quotations.component';
 import { ViewqoutationsComponent } from './quotations/viewqoutations/viewqoutations.component';
 import { ViewuserComponent } from './users/viewuser/viewuser.component';
+import { TenderstakenComponent } from './tenderstaken/tenderstaken.component';
+import { AdsComponent } from './ads/ads.component';
 import { authGuard } from 'src/shared/auth.guard';
 
 const routes: Routes = [
@@ -46,6 +48,12 @@ const routes: Routes = [
   },
   {
     path: 'viewUser/:userId', component: ViewuserComponent
+  },
+  {
+    path: 'tenderstaken', component: TenderstakenComponent
+  },
+  {
+    path: 'ads', component: AdsComponent
   }
 
 ];

@@ -1,1 +1,64 @@
-<p>tenderstaken works!</p>
+<section class="sect1">
+    <div class="container mt-5 mb-5" *ngIf="owner=='Admin';else users">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <table class="table table-bordered text-center mt-4 mb-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tender Name</th>
+                            <th scope="col">Company Name</th>
+                            <th scope="col">Proprietor</th>
+                            <th scope="col">Project Value</th>
+                            <th scope="col">Quoted Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let taken of tendertaken">
+                        <tr>
+                            <td id="tendername">{{taken.tenderName}}</td>
+                            <td>{{taken.companyName}}</td>
+                            <td>{{taken.proprieator}}</td>
+                            <td>{{taken.projectValue | currency : "INR" : "symbol" : "3.0"}}</td>
+                            <td>{{taken.qouteAmount | currency : "INR" : "symbol" : "3.0"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+    <ng-template #users>
+        <div class="container mt-2 mb-5" *ngIf="tendertaken && tendertaken.length > 0">
+            <h1 class="text-center mt-4 mb-2">Quotations</h1>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <table class="table table-bordered text-center mt-4 mb-3">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tender Name</th>
+                                <th scope="col">Company Name</th>
+                                <th scope="col">Proprietor</th>
+                                <th scope="col">Project Value</th>
+                                <th scope="col">Quoted Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let taken of tendertaken">
+                            <tr>
+                                <td id="tendername">{{taken.tenderName}}</td>
+                                <td>{{taken.companyName}}</td>
+                                <td>{{taken.proprieator}}</td>
+                                <td>{{taken.projectValue | currency : "INR" : "symbol" : "3.0"}}</td>
+                                <td>{{taken.qouteAmount | currency : "INR" : "symbol" : "3.0"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+        <div *ngIf="!tendertaken || tendertaken.length === 0">
+            <h1 class="text-center mt-5">No Tenders available</h1>
+        </div>
+    </ng-template>
+</section>

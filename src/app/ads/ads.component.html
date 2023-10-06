@@ -1,0 +1,37 @@
+<section class="sect1">
+    <div class="container mt-5 mb-2">
+        <h1 class="text-center">Post Ad</h1>
+        <hr>
+        <div class="row mt-2 mb-2">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 text-center">
+                <form [formGroup]="postAdForm" novalidate>
+                    <div class="form-group mb-3">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Ad Title</mat-label>
+                            <input type="text" matInput placeholder="Ad Title" formControlName="adTitle"
+                                [ngClass]="{'is-invalid':adTitle.errors && (adTitle.touched || adTitle.dirty)}" />
+                            <mat-error *ngIf="adTitle.errors?.required">Required Field</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group mb-5">
+                        <label class="pb-2">Upload Poster</label>
+                        <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <p-toast position="top-right"></p-toast>
+                        <!--back to home button-->
+                        <button class="me-3" mat-icon mat-raised-button color="warn" routerLink=''>
+                            Go Back<mat-icon>home</mat-icon></button>
+                        <!--submit button-->
+                        <button mat-icon mat-raised-button color="primary" (click)="onPost()">
+                            Post Ad<mat-icon>done</mat-icon></button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</section>

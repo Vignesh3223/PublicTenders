@@ -22,11 +22,12 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <div *ngIf="roleid == 1">
                 <li><a class="dropdown-item" routerLink='/users'>Users</a></li>
+                <li><a class="dropdown-item" routerLink='/ads'>Post Ad</a></li>
               </div>
               <div *ngIf="roleid == 1 || roleid == 2">
                 <li><a class="dropdown-item" routerLink='/tenders'>Tenders</a></li>
                 <li><a class="dropdown-item" routerLink='/quotations'>Quotations</a></li>
-                <li><a class="dropdown-item" href="#">Tenders Taken</a></li>
+                <li><a class="dropdown-item" routerLink='/tenderstaken'>Tenders Taken</a></li>
               </div>
             </ul>
           </li>

@@ -17,6 +17,12 @@ import { QuotationsComponent } from './quotations/quotations.component';
 import { TenderstakenComponent } from './tenderstaken/tenderstaken.component';
 import { PublishtendersComponent } from './tenders/publishtenders/publishtenders.component';
 import { ViewtenderComponent } from './tenders/viewtender/viewtender.component';
+import { ViewqoutationsComponent } from './quotations/viewqoutations/viewqoutations.component';
+import { UploadComponent } from './upload/upload.component';
+import { ViewuserComponent } from './users/viewuser/viewuser.component';
+import { AdsComponent } from './ads/ads.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,15 +38,11 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
-import { FooterComponent } from './footer/footer.component';
+import { CarouselModule } from 'primeng/carousel';
+
 import { FilterPipe } from '../shared/filter.pipe';
 import { SearchPipe } from '../shared/search.pipe';
 import { SortdatePipe } from '../shared/sortdate.pipe';
-import { ViewqoutationsComponent } from './quotations/viewqoutations/viewqoutations.component';
-import { UploadComponent } from './upload/upload.component';
-import { ViewuserComponent } from './users/viewuser/viewuser.component';
-
-
 
 
 @NgModule({
@@ -63,7 +65,8 @@ import { ViewuserComponent } from './users/viewuser/viewuser.component';
     SortdatePipe,
     ViewqoutationsComponent,
     UploadComponent,
-    ViewuserComponent
+    ViewuserComponent,
+    AdsComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +86,8 @@ import { ViewuserComponent } from './users/viewuser/viewuser.component';
     CalendarModule,
     DropdownModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    CarouselModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
