@@ -21,8 +21,8 @@ export class SigninComponent implements OnInit {
   loginapi = environment.loginurl;
 
   LoginForm: FormGroup | any;
-  Email: FormControl | any;
-  Password: FormControl | any;
+  email: FormControl | any;
+  password: FormControl | any;
 
   submitted = false;
 
@@ -34,13 +34,13 @@ export class SigninComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.Email = new FormControl('',
+    this.email = new FormControl('',
       [
         Validators.required,
         Validators.email,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
       ]);
-    this.Password = new FormControl('',
+    this.password = new FormControl('',
       [
         Validators.required,
         Validators.minLength(6),
@@ -48,8 +48,8 @@ export class SigninComponent implements OnInit {
         //Validators.pattern('(?=.*[$@^!%*?&]),(?=.*[A-Za-z0-9])')
       ]);
     this.LoginForm = new FormGroup({
-      Email: this.Email,
-      Password: this.Password
+      email: this.email,
+      password: this.password
     })
   }
 
@@ -71,18 +71,17 @@ export class SigninComponent implements OnInit {
       this.showError();
     }
     else {
-
       this.httpclient.post<Login>(this.loginapi, this.LoginForm.value).subscribe({
         next: (res) => {
           console.log(res);
           var user = `${res.userid}`;
-          var role = `${res.RoleId}`;
+          var role = `${res.roleId}`;
           var token = res.token;
           var companyname = res.companyname;
-          var email = res.Email;
           var prop = res.proprieator;
           var estd = res.establishedDate
           var profile = res.profilePic;
+          var email = res.email;
           localStorage.setItem('token', token);
           localStorage.setItem('role', role);
           localStorage.setItem('user', user);
@@ -92,7 +91,6 @@ export class SigninComponent implements OnInit {
           localStorage.setItem('establishedDate', estd);
           localStorage.setItem('profile', profile);
           this.showSuccess();
-          this.LoginForm.reset();
           setTimeout(() => { this.router.navigate(['']); }, 1000);
         },
         error: (res) => {

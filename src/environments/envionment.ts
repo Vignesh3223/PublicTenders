@@ -11,5 +11,7 @@ export const environment = {
     //tendersurl
     tendersurl:"https://localhost:44372/api/Tenders",
     //quotationurl
-    quotationurl:"https://localhost:44372/api/Quotations"
+    quotationurl:"https://localhost:44372/api/Quotations",
+    //tenderstakenurl
+    tenderstakenurl:"https://localhost:44372/api/TendersTakens"
 }

@@ -36,7 +36,7 @@ export class TendersComponent implements OnInit {
   sortDirection: any;
   optionSelected: any;
 
-  public proprieator: string | any;
+  public roleid: number | any;
 
   paymentHandler: any = null;
   paymentButtonHidden: boolean = false;
@@ -45,6 +45,7 @@ export class TendersComponent implements OnInit {
   userid: number | any;
   company: string | any;
   owner: string | any;
+  mail: string | any;
   estdDate: string | any;
   tenderid: number | any;
   tendname: string | any;
@@ -69,6 +70,7 @@ export class TendersComponent implements OnInit {
   UserId: FormControl | any;
   CompanyName: FormControl | any;
   Proprieator: FormControl | any;
+  email: FormControl | any;
   establishedDate: FormControl | any;
   TenderId: FormControl | any;
   TenderName: FormControl | any;
@@ -124,6 +126,7 @@ export class TendersComponent implements OnInit {
     this.UserId = new FormControl('');
     this.CompanyName = new FormControl('');
     this.Proprieator = new FormControl('');
+    this.email = new FormControl('');
     this.establishedDate = new FormControl('');
     this.TenderId = new FormControl('');
     this.TenderName = new FormControl('');
@@ -142,6 +145,7 @@ export class TendersComponent implements OnInit {
       UserId: this.UserId,
       CompanyName: this.CompanyName,
       Proprieator: this.Proprieator,
+      email: this.email,
       establishedDate: this.establishedDate,
       TenderId: this.TenderId,
       TenderName: this.TenderName,
@@ -168,7 +172,7 @@ export class TendersComponent implements OnInit {
       });
     });
 
-    this.proprieator = localStorage.getItem('proprieator');
+    this.roleid = localStorage.getItem('role');
 
     this.invokeStripe();
   }
@@ -205,12 +209,14 @@ export class TendersComponent implements OnInit {
     this.userid = localStorage.getItem('user');
     this.company = localStorage.getItem('cname');
     this.owner = localStorage.getItem('proprieator');
+    this.mail = localStorage.getItem('email');
     this.estdDate = localStorage.getItem('establishedDate');
 
     const userDetails = {
       UserId: this.userid,
       CompanyName: this.company,
       Proprieator: this.owner,
+      email:this.mail,
       establishedDate: this.estdDate
     };
 
@@ -236,7 +242,7 @@ export class TendersComponent implements OnInit {
 
     this.QuoteForm.patchValue({
       ...userDetails,
-      ...tenderDetails,
+      ...tenderDetails
     });
   }
 
@@ -249,9 +255,7 @@ export class TendersComponent implements OnInit {
       if (this.paymentSuccess) {
         this.quoteservice.postquotations(this.QuoteForm.value).subscribe({
           next: (res) => {
-            console.log(res);
             this.showSuccess();
-            this.QuoteForm.reset();
           },
           error: (err) => {
             console.log(err);
@@ -263,6 +267,4 @@ export class TendersComponent implements OnInit {
       }
     }
   }
-
-
 }

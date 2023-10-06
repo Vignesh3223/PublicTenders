@@ -42,7 +42,7 @@ const routes: Routes = [
     path: 'quotations', component: QuotationsComponent
   },
   {
-    path: 'viewQuotations/:tenderId', component: ViewqoutationsComponent
+    path: 'viewQuotations/:tenderid', component: ViewqoutationsComponent
   },
   {
     path: 'viewUser/:userId', component: ViewuserComponent

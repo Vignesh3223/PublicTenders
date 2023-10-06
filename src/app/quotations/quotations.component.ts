@@ -21,7 +21,7 @@ export class QuotationsComponent implements OnInit {
   public owner: string | any;
   public company: string | any;
 
-  tenderId!: number;
+  tenderid!: number;
 
   constructor(
     private tenderserv: TenderService,
@@ -54,7 +54,7 @@ export class QuotationsComponent implements OnInit {
   }
 
   viewQuotations(id: number) {
-    this.tenderId = id;
+    this.tenderid = id;
     this.route.navigate(['viewQuotations/' + id]);
   }
 

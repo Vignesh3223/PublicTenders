@@ -11,7 +11,7 @@ export class UsersComponent implements OnInit {
 
   userlist: any;
 
-  userid!: number;
+  userId!: number;
 
   constructor(private userserv: UserService, private route: Router) { }
 
@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   }
 
   viewUser(id: number) {
-    this.userid = id;
+    this.userId = id;
     this.route.navigate(['viewUser/' + id]);
   }
 }

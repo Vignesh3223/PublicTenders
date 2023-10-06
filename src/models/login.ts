@@ -1,9 +1,9 @@
 export interface Login {
-    Email: string;
-    Password: string;
+    email: string;
+    password: string;
     token: string;
     companyname: string;
-    RoleId: number;
+    roleId: number;
     userid: number;
     proprieator: string;
     establishedDate: string;

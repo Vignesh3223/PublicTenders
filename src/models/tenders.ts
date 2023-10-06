@@ -12,4 +12,5 @@ export interface Tenders {
     projectStartDate: string;
     projectEndDate: string;
     applicationFee: number;
+    isTaken: boolean;
 }

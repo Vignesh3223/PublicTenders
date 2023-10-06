@@ -10,7 +10,7 @@ import { Users } from 'src/models/users';
 })
 export class ViewuserComponent implements OnInit {
 
-  userid: number | any;
+  userId: number | any;
   userdata: Users | any;
 
   constructor(
@@ -19,9 +19,9 @@ export class ViewuserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userid = this.actRoute.snapshot.params['id'];
+    this.userId = this.actRoute.snapshot.params['userId'];
 
-    this.userserv.getUserbyId(this.userid).subscribe(
+    this.userserv.getUserbyId(this.userId).subscribe(
       (user) => {
         this.userdata = user;
       });

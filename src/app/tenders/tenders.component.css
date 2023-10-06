@@ -16,3 +16,8 @@ table {
 .example-full-width {
     width: 100%;
 }
+
+#qtamt {
+    width: 50%;
+    margin-left: 25%;
+}

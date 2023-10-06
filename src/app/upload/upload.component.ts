@@ -9,7 +9,6 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 export class UploadComponent implements OnInit {
 
   public message!: string;
-  public progress!: number;
 
   @Output() public onUploadFinished = new EventEmitter();
 
@@ -28,10 +27,7 @@ export class UploadComponent implements OnInit {
 
     this.httpclient.post('https://localhost:44372/api/Upload', formData, { reportProgress: true, observe: 'events' }).subscribe(
       event => {
-        if (event.type === HttpEventType.UploadProgress) {
-          this.progress = Math.round(100 * event.loaded / 100);
-        }
-        else if(event.type === HttpEventType.Response){
+        if(event.type === HttpEventType.Response){
           this.message = 'Upload Success';
           this.onUploadFinished.emit(event.body);
         }

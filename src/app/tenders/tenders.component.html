@@ -1,6 +1,12 @@
 <section class="sect1">
     <div class="conatiner mt-2 mb-5">
-        <h1 class="text-center mb-2">Public Tenders</h1>
+        <span class="d-flex">
+            <h1 class="text-center mb-2">Public Tenders</h1>
+            <div class="me-2 text-end" *ngIf="roleid==1">
+                <button type="button mt-4" class="btn btn-secondary" routerLink='/publishtenders'>
+                    Publish Tender</button>
+            </div>
+        </span>
         <hr>
         <div class="row">
             <div class="col-md-9 justify-content-center">
@@ -17,16 +23,16 @@
                     </thead>
                     <tbody
                         *ngFor="let tender of tenderslist | filter:selectedCategory  | search:searchText  | sortdate: [sortParam , sortDirection]">
-                        <tr>
+                        <tr *ngIf="!tender.isTaken">
                             <td (click)="viewTender(tender.tenderId)" id="tendername">{{tender.tenderName}}</td>
                             <td>{{tender.tenderOpeningDate}}</td>
                             <td>{{tender.tenderClosingDate}}</td>
                             <td>{{tender.categoryName}}</td>
                             <td>{{tender.projectValue | currency : "INR" : "symbol" : "3.0"}}</td>
-                            <div *ngIf="proprieator=='Admin'">
+                            <div *ngIf="roleid == 1">
                                 <td><button class="btn btn-warning">Edit</button></td>
                             </div>
-                            <div *ngIf="proprieator!='Admin'">
+                            <div *ngIf="roleid == 2">
                                 <td><button type="button" class="btn btn-info" data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop" (click)="GetDetails(tender)">Quote</button>
                                 </td>
@@ -36,8 +42,7 @@
                 </table>
             </div>
             <div class="col-md-3 text-center">
-                <button type="button mt-4" class="btn btn-secondary" routerLink='/publishtenders'>
-                    Publish Tender</button>
+
                 <hr>
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
@@ -114,9 +119,9 @@
         </div>
     </div>
 </section>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade modal-xl" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="staticBackdropLabel">Quote Tender</h2>
@@ -124,98 +129,91 @@
             </div>
             <div class="modal-body">
                 <form [formGroup]="QuoteForm" novalidate>
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>User ID</mat-label>
-                            <input type="text" matInput formControlName="UserId">
-                        </mat-form-field>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Company Name</mat-label>
+                                    <input type="text" matInput formControlName="CompanyName" readonly>
+                                </mat-form-field>
+                            </div>
 
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Company Name</mat-label>
-                            <input type="text" matInput formControlName="CompanyName">
-                        </mat-form-field>
-                    </div>
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Proprieator</mat-label>
+                                    <input type="text" matInput formControlName="Proprieator" readonly>
+                                </mat-form-field>
+                            </div>
 
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Proprieator</mat-label>
-                            <input type="text" matInput formControlName="Proprieator">
-                        </mat-form-field>
-                    </div>
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Company Established Date</mat-label>
+                                    <input type="text" matInput formControlName="establishedDate" readonly>
+                                </mat-form-field>
+                            </div>
 
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Company Established Date</mat-label>
-                            <input type="text" matInput formControlName="establishedDate">
-                        </mat-form-field>
-                    </div>
+                            <div class="form-group mb-2 d-flex">
+                                <mat-form-field appearance="outline" class="example-full-width me-2">
+                                    <mat-label>Application Fee</mat-label>
+                                    <input type="text" matInput [(ngModel)]="ApplicationFee"
+                                        formControlName="ApplicationFee" readonly>
+                                </mat-form-field>
+                                <p-toast position="top-right"></p-toast>
+                                <button class="mt-2" mat-raised-button color="accent" [hidden]="paymentButtonHidden"
+                                    (click)="makePayment()">Pay</button>
+                                <div *ngIf="paymentSuccess" class="mt-2"><mat-icon
+                                        style="color: green;">done_outline</mat-icon>
+                                </div>
+                            </div>
 
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Tender Id</mat-label>
-                            <input type="text" matInput formControlName="TenderId">
-                        </mat-form-field>
-                    </div>
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>ProjectStartDate</mat-label>
+                                    <input type="text" matInput formControlName="ProjectStartDate" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
 
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Tender Name</mat-label>
-                            <input type="text" matInput formControlName="TenderName">
-                        </mat-form-field>
-                    </div>
+                        <div class="col-md-6 text-center">
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Tender Name</mat-label>
+                                    <input type="text" matInput formControlName="TenderName" readonly>
+                                </mat-form-field>
+                            </div>
 
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Project Value</mat-label>
-                            <input type="text" matInput formControlName="ProjectValue">
-                        </mat-form-field>
-                    </div>
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Project Value</mat-label>
+                                    <input type="text" matInput formControlName="ProjectValue" readonly>
+                                </mat-form-field>
+                            </div>
 
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Location</mat-label>
-                            <input type="text" matInput formControlName="Location">
-                        </mat-form-field>
-                    </div>
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Location</mat-label>
+                                    <input type="text" matInput formControlName="Location" readonly>
+                                </mat-form-field>
+                            </div>
 
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Authority</mat-label>
-                            <input type="text" matInput formControlName="Authority">
-                        </mat-form-field>
-                    </div>
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Authority</mat-label>
+                                    <input type="text" matInput formControlName="Authority" readonly>
+                                </mat-form-field>
+                            </div>
 
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>ProjectStartDate</mat-label>
-                            <input type="text" matInput formControlName="ProjectStartDate">
-                        </mat-form-field>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>ProjectEndDate</mat-label>
-                            <input type="text" matInput formControlName="ProjectEndDate">
-                        </mat-form-field>
-                    </div>
-
-                    <div class="form-group mb-3 d-flex">
-                        <mat-form-field appearance="outline" class="example-full-width me-3">
-                            <mat-label>Application Fee</mat-label>
-                            <input type="text" matInput [(ngModel)]="ApplicationFee" formControlName="ApplicationFee">
-                        </mat-form-field>
-                        <p-toast position="top-right"></p-toast>
-                        <button class="mt-2" mat-raised-button color="accent" [hidden]="paymentButtonHidden"
-                            (click)="makePayment()">Pay</button>
-                        <div *ngIf="paymentSuccess" class="mt-2"><mat-icon style="color: green;">done_outline</mat-icon>
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>ProjectEndDate</mat-label>
+                                    <input type="text" matInput formControlName="ProjectEndDate" readonly>
+                                </mat-form-field>
+                            </div>
                         </div>
                     </div>
 
-
-                    <div class="form-group mb-3">
-                        <mat-form-field appearance="outline" class="example-full-width">
+                    <div class="form-group mb-2">
+                        <mat-form-field appearance="outline" class="example-full-width" id="qtamt">
                             <mat-label>QuoteAmount</mat-label>
                             <input type="text" matInput formControlName="QuoteAmount"
                                 [ngClass]="{'is-invalid':QuoteAmount.errors && (QuoteAmount.touched || QuoteAmount.dirty)}" />
@@ -223,9 +221,10 @@
                             <mat-error *ngIf="QuoteAmount.errors?.pattern">Enter a valid Amount</mat-error>
                         </mat-form-field>
                     </div>
+
                     <div class="text-center">
                         <p-toast position="top-right"></p-toast>
-                        <button class="me-3" mat-icon mat-raised-button color="warn"
+                        <button class="me-2" mat-icon mat-raised-button color="warn"
                             data-bs-dismiss="modal">Close</button>
                         <button mat-icon mat-raised-button color="primary" (click)="onQuote()">Quote</button>
                     </div>

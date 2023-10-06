@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <table class="table table-bordered text-center mt-4 mb-3">
+                <table class="table table-bordered text-center mt-4 mb-2">
                     <thead>
                         <tr>
                             <th scope="col">Company Name</th>
@@ -20,9 +20,11 @@
                             <td>{{quot.companyName}}</td>
                             <td>{{quot.proprieator}}</td>
                             <td>{{quot.establishedDate}}</td>
-                            <td>{{quot.quoteAmount | currency : "INR" : "symbol" : "3.0"}}</td>
+                            <td>{{quot.quoteAmount | currency : "INR" : "symbol" : "2.0"}}</td>
                             <td>{{quot.quotedDate}}</td>
-                            <td><button type="button" class="btn btn-secondary">Give tender</button></td>
+                            <td><button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop" (click)="GetDetails(quot)">Give tender</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -31,3 +33,110 @@
         </div>
     </div>
 </section>
+<div class="modal fade modal-xl" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="staticBackdropLabel">Give Tender</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="TenderTakenForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Tender ID</mat-label>
+                                    <input type="text" matInput formControlName="tenderId" readonly>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Tender Name</mat-label>
+                                    <input type="text" matInput formControlName="tenderName" readonly>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Project Value</mat-label>
+                                    <input type="text" matInput formControlName="projectValue" readonly>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Location</mat-label>
+                                    <input type="text" matInput formControlName="location" readonly>
+                                </mat-form-field>
+                            </div>
+
+
+
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>ProjectStartDate</mat-label>
+                                    <input type="text" matInput formControlName="projectStartDate" readonly>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Quotation ID</mat-label>
+                                    <input type="text" matInput formControlName="quotationId" readonly>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Company Name</mat-label>
+                                    <input type="text" matInput formControlName="companyName" readonly>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Proprieator</mat-label>
+                                    <input type="text" matInput formControlName="proprieator" readonly>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>Authority</mat-label>
+                                    <input type="text" matInput formControlName="authority" readonly>
+                                </mat-form-field>
+                            </div>
+
+
+                            <div class="form-group mb-2">
+                                <mat-form-field appearance="outline" class="example-full-width">
+                                    <mat-label>ProjectEndDate</mat-label>
+                                    <input type="text" matInput formControlName="projectEndDate" readonly>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <mat-form-field appearance="outline" class="example-full-width" id="qtamt">
+                            <mat-label>QuoteAmount</mat-label>
+                            <input type="text" matInput formControlName="quoteAmount" readonly>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="text-center">
+                        <p-toast position="top-right"></p-toast>
+                        <button class="me-2" mat-icon mat-raised-button color="warn"
+                            data-bs-dismiss="modal">Close</button>
+                        <button mat-icon mat-raised-button color="primary" (click)="onLend()">Give Tender</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

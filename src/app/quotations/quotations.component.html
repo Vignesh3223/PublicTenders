@@ -14,7 +14,7 @@
                         </tr>
                     </thead>
                     <tbody *ngFor="let tender of tenderlist">
-                        <tr>
+                        <tr *ngIf="!tender.isTaken">
                             <td (click)="viewQuotations(tender.tenderId)" id="tendername">{{tender.tenderName}}</td>
                             <td>{{tender.tenderOpeningDate}}</td>
                             <td>{{tender.tenderClosingDate}}</td>
