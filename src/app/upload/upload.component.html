@@ -2,7 +2,8 @@
     <div class="col-md-3"></div>
     <div class="col-md-6">
         <input type="file" #file placeholder="Choose File" (change)="uploadFile(file.files)" hidden>
-        <button type="button" class="btn btn-success" (click)="file.click()">upload File</button>
+        <button type="button" mat-icon mat-raised-button color="accent" (click)="file.click()"
+        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Upload File"><i class="pi pi-upload"></i></button>
         <span class="upload ms-2" *ngIf="message">{{message}}</span>
     </div>
 </div>

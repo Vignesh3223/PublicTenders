@@ -1,15 +1,52 @@
 <section class="sect1">
     <div class="conatiner mt-2 mb-5">
-        <span class="d-flex">
-            <h1 class="text-center mb-2">Public Tenders</h1>
-            <div class="me-2 text-end" *ngIf="roleid==1">
-                <button type="button mt-4" class="btn btn-secondary" routerLink='/publishtenders'>
-                    Publish Tender</button>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+            <h1 class="ms-5 mt-2">Public Tenders</h1>
+            <div *ngIf="roleid==1">
+                <button type="button" class="btn btn-secondary me-5" routerLink='/publishtenders'>Publish
+                    Tender</button>
             </div>
-        </span>
+        </div>
         <hr>
         <div class="row">
-            <div class="col-md-9 justify-content-center">
+            <div class="col-md-1"></div>
+            <div class="col-md-3 text-center">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Location/Name</mat-label>
+                    <mat-icon matSuffix>search</mat-icon>
+                    <input type="text" matInput placeholder="Enter Search Text" [(ngModel)]="searchText">
+                </mat-form-field>
+            </div>
+            <div class="col-md-4 text-center">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Sort by Tender Closing Date</mat-label>
+                    <select class="form-control" matNativeControl (change)="onOptionsSelected($event)" id="sort">
+                        <option value="">Sort by :</option>
+                        <option value="n-f">Nearest Date</option>
+                        <option value="f-n">Farest Date</option>
+                    </select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 text-center">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Filter by Category</mat-label>
+                    <mat-select id="filter" [(ngModel)]="selectedCategory">
+                        <mat-option value="Manufacture">Manufacture</mat-option>
+                        <mat-option value="Construction">Construction</mat-option>
+                        <mat-option value="Healthcare">Healthcare</mat-option>
+                        <mat-option value="Transportation">Transportation</mat-option>
+                        <mat-option value="Education">Education</mat-option>
+                        <mat-option value="Environmental">Environmental</mat-option>
+                        <mat-option value="Communication">Communication</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-1"></div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 justify-content-center">
                 <table class="table table-bordered text-center mt-4 mb-3">
                     <thead>
                         <tr>
@@ -24,98 +61,29 @@
                     <tbody
                         *ngFor="let tender of tenderslist | filter:selectedCategory  | search:searchText  | sortdate: [sortParam , sortDirection]">
                         <tr *ngIf="!tender.isTaken">
-                            <td (click)="viewTender(tender.tenderId)" id="tendername">{{tender.tenderName}}</td>
+                            <td (click)="viewTender(tender.tenderId)" id="tendername">
+                                <i class="pi pi-arrow-right" style="font-weight: bold;"></i> {{tender.tenderName}}
+                            </td>
                             <td>{{tender.tenderOpeningDate}}</td>
                             <td>{{tender.tenderClosingDate}}</td>
                             <td>{{tender.categoryName}}</td>
                             <td>{{tender.projectValue | currency : "INR" : "symbol" : "3.0"}}</td>
-                            <div *ngIf="roleid == 1">
-                                <td><button class="btn btn-warning">Edit</button></td>
-                            </div>
-                            <div *ngIf="roleid == 2">
-                                <td><button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop" (click)="GetDetails(tender)">Quote</button>
-                                </td>
-                            </div>
+                            <td>
+                                <div *ngIf="roleid == 1">
+                                    <button class="me-3" mat-icon mat-mini-fab color="accent" data-bs-toggle="tooltip"
+                                        data-bs-placement="bottom" title="Edit"><mat-icon>edit</mat-icon></button>
+                                </div>
+                                <div *ngIf="roleid == 2">
+                                    <button type="button" mat-icon mat-raised-button color="primary"
+                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                        (click)="GetDetails(tender)">Quote</button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-3 text-center">
-
-                <hr>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                aria-controls="flush-collapseOne">
-                                Search by Location / Name
-                            </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse"
-                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body d-flex">
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                    <mat-label>Location/Name</mat-label>
-                                    <mat-icon matSuffix>search</mat-icon>
-                                    <input type="text" matInput placeholder="Enter Search Text"
-                                        [(ngModel)]="searchText">
-                                </mat-form-field>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseTwo" aria-expanded="false"
-                                aria-controls="flush-collapseTwo">
-                                Sort by Tender Closing Date
-                            </button>
-                        </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
-                            aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body d-flex">
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                    <mat-label>Sort by Tender Closing Date</mat-label>
-                                    <select class="form-control" matNativeControl (change)="onOptionsSelected($event)"
-                                        id="sort">
-                                        <option value="">Sort by :</option>
-                                        <option value="n-f">Nearest Date</option>
-                                        <option value="f-n">Farest Date</option>
-                                    </select>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseThree" aria-expanded="false"
-                                aria-controls="flush-collapseThree">
-                                Filter by Category
-                            </button>
-                        </h2>
-                        <div id="flush-collapseThree" class="accordion-collapse collapse"
-                            aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body d-flex">
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                    <mat-label>Filter by Category</mat-label>
-                                    <mat-select id="filter" [(ngModel)]="selectedCategory">
-                                        <mat-option value="Manufacture">Manufacture</mat-option>
-                                        <mat-option value="Construction">Construction</mat-option>
-                                        <mat-option value="Healthcare">Healthcare</mat-option>
-                                        <mat-option value="Transportation">Transportation</mat-option>
-                                        <mat-option value="Education">Education</mat-option>
-                                        <mat-option value="Environmental">Environmental</mat-option>
-                                        <mat-option value="Communication">Communication</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="col-md-1"></div>
         </div>
     </div>
 </section>

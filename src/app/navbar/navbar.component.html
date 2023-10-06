@@ -34,7 +34,7 @@
         </ul>
         <form class="d-flex">
           <ng-container *ngIf="!hide">
-            <button mat-icon mat-raised-button color="primary" routerLink='/signin'>Login</button>
+            <button mat-icon mat-raised-button color="primary" routerLink='/signin'>Login <i class="pi pi-sign-in"></i></button>
           </ng-container>
           <ng-container *ngIf="hide">
             <div class="dropdown justify-content-center d-flex">
@@ -44,7 +44,7 @@
                 aria-expanded="false">{{companyname}}</h2>
               <ul class="dropdown-menu" aria-labelledby="userdropdown">
                 <li><a class="dropdown-item" routerLink=''>Edit Profile</a></li>
-                <button class="mt-3" mat-raised-button color="warn" (click)="logout()">Logout</button>
+                <button class="mt-3" mat-raised-button color="warn" (click)="logout()">Logout <i class="pi pi-sign-out"></i></button>
               </ul>
             </div>
           </ng-container>

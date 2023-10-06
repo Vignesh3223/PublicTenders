@@ -1,26 +1,47 @@
 <section class="sect1">
   <div class="container-fluid">
-    <h1 class="text-center">User Details</h1>
-    <table class="table table-bordered border-primary">
-      <thead>
-        <tr>
-          <th scope="col">Profile</th>
-          <th scope="col">Company Name</th>
-          <th scope="col">Proprieator</th>
-          <th scope="col">Email</th>
-          <th scope="col">Sector</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let user of userlist">
-        <tr>
-          <td><img src="{{'https://localhost:44372/' + user.profilePic}}" alt="profilepic"
-              style="width:75px;height: 75px;"></td>
-          <td (click)="viewUser(user.UserId)">{{user.companyName}}</td>
-          <td>{{user.proprieator}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.companySector}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <h1 class="text-center mt-4 mb-4">Users</h1>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <table class="table table-bordered border-secondary">
+          <thead>
+            <tr>
+              <th scope="col">Profile</th>
+              <th scope="col">Company Name</th>
+              <th scope="col">Proprieator</th>
+              <th scope="col">Email</th>
+              <th scope="col">Sector</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let user of userlist">
+            <tr>
+              <td><img src="{{'https://localhost:44372/' + user.profilePic}}" alt="profilepic"
+                  class="rounded-circle ms-3 me-2" style="width:75px;height: 75px;"></td>
+              <td (click)="viewUser(user.userId)" id="username"><i class="pi pi-arrow-right"
+                  style="font-weight: bold;"></i>
+                {{user.companyName}}</td>
+              <td>{{user.proprieator}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.companySector}}</td>
+              <td>
+                <div *ngIf="roleid==1">
+                  <button class="me-3" mat-icon mat-mini-fab color="accent" data-bs-toggle="tooltip"
+                    data-bs-placement="bottom" title="Edit"><mat-icon>edit</mat-icon></button>
+                  <button class="me-3" mat-icon mat-mini-fab color="warn" data-bs-toggle="tooltip"
+                    data-bs-placement="bottom" title="Delete"><mat-icon>delete</mat-icon></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+    <div class="card flex justify-content-center" *ngIf="userlist && userlist.length > 0">
+      <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="userlist.length"
+        [rowsPerPageOptions]="[2, 5, 10]"></p-paginator>
+    </div>
   </div>
 </section>

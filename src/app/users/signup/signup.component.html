@@ -61,13 +61,13 @@
                         <mat-label>Company Sector</mat-label>
                         <select matNativeControl formControlName="companysector"
                             [ngClass]="{'is-invalid':companysector.errors && (companysector.touched || companysector.dirty)}">
-                            <option value="manufacture">Manufacture</option>
-                            <option value="construction">Construction</option>
-                            <option value="healthcare">Health Care</option>
-                            <option value="transportation">Transportation</option>
-                            <option value="education">Education</option>
-                            <option value="environmental">Environmental</option>
-                            <option value="communication">Communication</option>
+                            <option value="Manufacture">Manufacture</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Health Care">Health Care</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Education">Education</option>
+                            <option value="Environmental">Environmental</option>
+                            <option value="Communication">Communication</option>
                         </select>
                         <mat-error *ngIf="companysector.errors?.required">Required Field</mat-error>
                     </mat-form-field>

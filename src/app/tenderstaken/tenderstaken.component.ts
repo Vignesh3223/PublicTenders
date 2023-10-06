@@ -13,6 +13,7 @@ export class TenderstakenComponent implements OnInit {
 
   public owner: string | any;
   public company: string | any;
+  public roleid: number | any;
 
 
   constructor(
@@ -20,6 +21,7 @@ export class TenderstakenComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.roleid = localStorage.getItem('role');
     this.owner = localStorage.getItem('proprieator');
     this.company = localStorage.getItem('cname');
 

@@ -1,5 +1,6 @@
 <section class="sect1">
-    <div class="container mt-5 mb-5" *ngIf="owner=='Admin';else users">
+    <div class="container mt-2 mb-5" *ngIf="roleid == 1; else users">
+        <h1 class="text-center mb-2">Quotations</h1>
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
@@ -15,7 +16,9 @@
                     </thead>
                     <tbody *ngFor="let tender of tenderlist">
                         <tr *ngIf="!tender.isTaken">
-                            <td (click)="viewQuotations(tender.tenderId)" id="tendername">{{tender.tenderName}}</td>
+                            <td (click)="viewQuotations(tender.tenderId)" id="tendername">
+                                <i class="pi pi-arrow-right" style="font-weight: bold;"></i> {{tender.tenderName}}
+                            </td>
                             <td>{{tender.tenderOpeningDate}}</td>
                             <td>{{tender.tenderClosingDate}}</td>
                             <td>{{tender.categoryName}}</td>
@@ -61,6 +64,6 @@
         </div>
         <div *ngIf="!quotes || quotes.length === 0">
             <h1 class="text-center mt-5">No quotations available</h1>
-          </div>
+        </div>
     </ng-template>
 </section>

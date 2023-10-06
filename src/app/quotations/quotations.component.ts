@@ -20,6 +20,7 @@ export class QuotationsComponent implements OnInit {
 
   public owner: string | any;
   public company: string | any;
+  public roleid: number | any;
 
   tenderid!: number;
 
@@ -33,6 +34,7 @@ export class QuotationsComponent implements OnInit {
 
     this.owner = localStorage.getItem('proprieator');
     this.company = localStorage.getItem('cname');
+    this.roleid = localStorage.getItem('role');
 
     this.categoryserv.getCategories().subscribe((categories) => {
       const categoryList = categories;

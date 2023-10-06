@@ -93,15 +93,11 @@ export class ViewqoutationsComponent implements OnInit {
   }
 
   showSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Tender Given Successfully' });
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Tender Given and Mail Sent Successfully' });
   }
 
   showError() {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in all the details' });
-  }
-
-  showMailSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Mail Sent Successfully' });
   }
 
   GetDetails(quotation: Quotation) {
@@ -160,9 +156,7 @@ export class ViewqoutationsComponent implements OnInit {
         }
       });
       this.takeservice.postmail(this.TenderTakenForm.value).subscribe(
-        (mail) => {
-          this.showMailSuccess();
-        });
+        (mail) => { });
     }
   }
 }

@@ -1,22 +1,36 @@
 <section class="sec1">
     <div class="container mt-3 mb-5">
+        <h1 class="text-center mt-4 mb-4">Users</h1>
         <div class="card">
-            <div class="card-body" *ngFor="let user of userdata">
-                <div class="col-md-7">
-                    <h1>{{user.companyName}}</h1>
-                    <span>
-                        Proprieator: {{user.proprieator}}
-                        Email: {{user.email}}
-                        Address: {{user.address}}
-                        Conatct (Public Relationship Officer): {{user.contactNumber}}
-                        Established Date: {{user.establishedDate}}
-                        Company Sector: {{user.companySector}}
-                        GSTIN: {{user.gstin}}
-                        Company Registration Number: {{user.crn}}
-                    </span>
+            <div class="card-body" *ngIf="userdata && userdata.proprieator!='Admin'">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>{{userdata.companyName}}</h1>
+                        <h3>Proprieator: {{userdata.proprieator}}</h3>
+                        <h3>Email: {{userdata.email}}</h3>
+                        <h3>Address: {{userdata.address}}</h3>
+                        <h3>Conatct (Public Relationship Officer): {{userdata.contactNumber}}</h3>
+                        <h3>Established Date: {{userdata.establishedDate}}</h3>
+                        <h3>Company Sector: {{userdata.companySector}}</h3>
+                        <h3>GSTIN: {{userdata.gstin}}</h3>
+                        <h3>Company Registration Number: {{userdata.crn}}</h3>
+                    </div>
+                    <div class="col-md-5 justify-content-center">
+                        <img src="{{'https://localhost:44372/' + userdata.profilePic}}" alt="profilepic">
+                    </div>
                 </div>
-                <div class="col-md-5 justify-content-center">
-                    <img src="{{'https://localhost:44372/' + user.profilePic}}" alt="profilepic">
+            </div>
+
+            <div class="card-body" *ngIf="userdata && userdata.proprieator=='Admin'">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>{{userdata.companyName}}</h1>
+                        <h3>Proprieator: {{userdata.proprieator}}</h3>
+                        <h3>Email: {{userdata.email}}</h3>
+                    </div>
+                    <div class="col-md-5 justify-content-center">
+                        <img src="{{'https://localhost:44372/' + userdata.profilePic}}" alt="profilepic">
+                    </div>
                 </div>
             </div>
         </div>

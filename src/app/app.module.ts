@@ -39,6 +39,7 @@ import { MessageService } from 'primeng/api';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { CarouselModule } from 'primeng/carousel';
+import { PaginatorModule } from 'primeng/paginator';
 
 import { FilterPipe } from '../shared/filter.pipe';
 import { SearchPipe } from '../shared/search.pipe';
@@ -87,7 +88,8 @@ import { SortdatePipe } from '../shared/sortdate.pipe';
     DropdownModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    CarouselModule
+    CarouselModule,
+    PaginatorModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

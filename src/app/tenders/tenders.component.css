@@ -4,8 +4,8 @@
 
 #tendername {
     cursor: pointer;
-    font-weight: 400;
-    color: #176B87;
+    font-weight: bold;
+    color: navy;
 }
 
 table {
