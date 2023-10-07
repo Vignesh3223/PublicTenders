@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
     this.adserv.getAds().subscribe(
       (ads) => {
         this.adslist = ads;
-        console.log(this.adslist)
       });
   }
 
