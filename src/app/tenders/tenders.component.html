@@ -70,11 +70,6 @@
                                 <td>{{tender.categoryName}}</td>
                                 <td>{{tender.projectValue | currency : "INR" : "symbol" : "3.0"}}</td>
                                 <td>
-                                    <div *ngIf="roleid == 1">
-                                        <button class="me-3" mat-icon mat-mini-fab color="accent"
-                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                            title="Edit"><mat-icon>edit</mat-icon></button>
-                                    </div>
                                     <div *ngIf="roleid == 2">
                                         <button type="button" mat-icon mat-raised-button color="primary"
                                             data-bs-toggle="modal" data-bs-target="#staticBackdrop"

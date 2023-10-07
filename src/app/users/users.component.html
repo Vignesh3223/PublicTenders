@@ -13,7 +13,6 @@
                 <th scope="col">Proprietor</th>
                 <th scope="col">Email</th>
                 <th scope="col">Sector</th>
-                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody *ngFor="let user of userlist">
@@ -26,14 +25,6 @@
                 <td>{{user.proprieator}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.companySector}}</td>
-                <td>
-                  <div *ngIf="roleid==1">
-                    <button class="me-3" mat-icon mat-mini-fab color="accent" data-bs-toggle="tooltip"
-                      data-bs-placement="bottom" title="Edit"><mat-icon>edit</mat-icon></button>
-                    <button class="me-3" mat-icon mat-mini-fab color="warn" data-bs-toggle="tooltip"
-                      data-bs-placement="bottom" title="Delete"><mat-icon>delete</mat-icon></button>
-                  </div>
-                </td>
               </tr>
             </tbody>
           </table>

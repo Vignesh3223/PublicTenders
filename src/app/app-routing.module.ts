@@ -13,7 +13,7 @@ import { ViewqoutationsComponent } from './quotations/viewqoutations/viewqoutati
 import { ViewuserComponent } from './users/viewuser/viewuser.component';
 import { TenderstakenComponent } from './tenderstaken/tenderstaken.component';
 import { AdsComponent } from './ads/ads.component';
-import { authGuard } from 'src/shared/auth.guard';
+import { AuthGuard } from 'src/shared/auth.guard';
 
 const routes: Routes = [
   {
@@ -26,34 +26,34 @@ const routes: Routes = [
     path: 'signup', component: SignupComponent
   },
   {
-    path: 'users', component: UsersComponent
+    path: 'users', component: UsersComponent, canActivate: [AuthGuard]
   },
   {
     path: 'category', component: CategoryComponent
   },
   {
-    path: 'tenders', component: TendersComponent
+    path: 'tenders', component: TendersComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'publishtenders', component: PublishtendersComponent
+    path: 'publishtenders', component: PublishtendersComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'viewTender/:tenderId', component: ViewtenderComponent
+    path: 'viewTender/:tenderId', component: ViewtenderComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'quotations', component: QuotationsComponent
+    path: 'quotations', component: QuotationsComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'viewQuotations/:tenderid', component: ViewqoutationsComponent
+    path: 'viewQuotations/:tenderid', component: ViewqoutationsComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'viewUser/:userId', component: ViewuserComponent
+    path: 'viewUser/:userId', component: ViewuserComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'tenderstaken', component: TenderstakenComponent
+    path: 'tenderstaken', component: TenderstakenComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'ads', component: AdsComponent
+    path: 'ads', component: AdsComponent, canActivate: [AuthGuard]
   }
 
 ];
