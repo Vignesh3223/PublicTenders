@@ -2,19 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/services/user.service';
 import { Router } from '@angular/router';
 
-interface PageEvent {
-  first: number;
-  rows: number;
-  page: number;
-  pageCount: number;
-}
-
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-
 
 export class UsersComponent implements OnInit {
 
@@ -23,9 +15,6 @@ export class UsersComponent implements OnInit {
   userId!: number;
 
   public roleid: number | any;
-
-  first: number = 0;
-  rows: number = 3;
 
   constructor(private userserv: UserService, private route: Router) { }
 
@@ -42,11 +31,5 @@ export class UsersComponent implements OnInit {
   viewUser(id: number) {
     this.userId = id;
     this.route.navigate(['viewUser/' + id]);
-  }
-
-
-  onPageChange(event: PageEvent|any) {
-    this.first = event.first;
-    this.rows = event.rows;
   }
 }

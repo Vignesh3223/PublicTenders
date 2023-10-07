@@ -32,9 +32,5 @@
       </div>
       <div class="col-md-1"></div>
     </div>
-    <div class="card flex justify-content-center" *ngIf="userlist && userlist.length > 0">
-      <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows" [totalRecords]="userlist.length"
-        [rowsPerPageOptions]="[2, 5, 10]"></p-paginator>
-    </div>
   </div>
 </section>
