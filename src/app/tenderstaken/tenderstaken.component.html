@@ -32,7 +32,7 @@
         </div>
     </div>
     <ng-template #users>
-        <div class="container mt-2 mb-5" *ngIf="tendertaken && tendertaken.length > 0">
+        <div class="container mt-2 mb-5">
             <h1 class="text-center mt-4 mb-2">Quotations</h1>
             <div class="row">
                 <div class="col-md-1"></div>
@@ -66,9 +66,6 @@
                 </div>
                 <div class="col-md-1"></div>
             </div>
-        </div>
-        <div *ngIf="!tendertaken || tendertaken.length === 0">
-            <h1 class="text-center mt-5">No Tenders available</h1>
         </div>
     </ng-template>
 </section>
