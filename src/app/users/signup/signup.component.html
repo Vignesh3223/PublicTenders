@@ -16,8 +16,8 @@
 
                 <div class="form-group mb-3">
                     <mat-form-field appearance="outline" class="example-full-width">
-                        <mat-label>Proprieator</mat-label>
-                        <input type="text" matInput placeholder="Proprieator" formControlName="proprieator"
+                        <mat-label>Proprietor</mat-label>
+                        <input type="text" matInput placeholder="Proprietor" formControlName="proprieator"
                             [ngClass]="{'is-invalid':proprieator.errors && (proprieator.touched || proprieator.dirty),'is-valid':proprieator.valid}" />
                         <mat-error *ngIf="proprieator.errors?.required">Required Field</mat-error>
                         <mat-error *ngIf="proprieator.errors?.pattern">Name must contain only aphabets and
@@ -126,10 +126,8 @@
 
                 <div class="form-group text-center">
                     <p-toast position="top-right"></p-toast>
-                    <!--back to home button-->
                     <button class="me-3" mat-icon mat-raised-button color="warn" routerLink=''>
                         Go Back<mat-icon>home</mat-icon></button>
-                    <!--submit button-->
                     <button mat-icon mat-raised-button color="primary" (click)="onRegister()">
                         Sign Up<mat-icon>done</mat-icon></button>
                 </div>

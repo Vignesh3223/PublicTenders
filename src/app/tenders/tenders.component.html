@@ -47,41 +47,44 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10 justify-content-center">
-                <table class="table table-bordered text-center mt-4 mb-3">
-                    <thead>
-                        <tr>
-                            <th scope="col">Tender Name</th>
-                            <th scope="col">Opening Date</th>
-                            <th scope="col">Closing Date</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Project Value</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody
-                        *ngFor="let tender of tenderslist | filter:selectedCategory  | search:searchText  | sortdate: [sortParam , sortDirection]">
-                        <tr *ngIf="!tender.isTaken">
-                            <td (click)="viewTender(tender.tenderId)" id="tendername">
-                                <i class="pi pi-arrow-right" style="font-weight: bold;"></i> {{tender.tenderName}}
-                            </td>
-                            <td>{{tender.tenderOpeningDate}}</td>
-                            <td>{{tender.tenderClosingDate}}</td>
-                            <td>{{tender.categoryName}}</td>
-                            <td>{{tender.projectValue | currency : "INR" : "symbol" : "3.0"}}</td>
-                            <td>
-                                <div *ngIf="roleid == 1">
-                                    <button class="me-3" mat-icon mat-mini-fab color="accent" data-bs-toggle="tooltip"
-                                        data-bs-placement="bottom" title="Edit"><mat-icon>edit</mat-icon></button>
-                                </div>
-                                <div *ngIf="roleid == 2">
-                                    <button type="button" mat-icon mat-raised-button color="primary"
-                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                        (click)="GetDetails(tender)">Quote</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered bordered-secondary mt-4 mb-3">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tender Name</th>
+                                <th scope="col">Opening Date</th>
+                                <th scope="col">Closing Date</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Project Value</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody
+                            *ngFor="let tender of tenderslist | filter:selectedCategory  | search:searchText  | sortdate: [sortParam , sortDirection]">
+                            <tr *ngIf="!tender.isTaken">
+                                <td (click)="viewTender(tender.tenderId)" id="tendername">
+                                    <i class="pi pi-arrow-right" style="font-weight: bold;"></i> {{tender.tenderName}}
+                                </td>
+                                <td>{{tender.tenderOpeningDate}}</td>
+                                <td>{{tender.tenderClosingDate}}</td>
+                                <td>{{tender.categoryName}}</td>
+                                <td>{{tender.projectValue | currency : "INR" : "symbol" : "3.0"}}</td>
+                                <td>
+                                    <div *ngIf="roleid == 1">
+                                        <button class="me-3" mat-icon mat-mini-fab color="accent"
+                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                            title="Edit"><mat-icon>edit</mat-icon></button>
+                                    </div>
+                                    <div *ngIf="roleid == 2">
+                                        <button type="button" mat-icon mat-raised-button color="primary"
+                                            data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                            (click)="GetDetails(tender)">Quote</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col-md-1"></div>
         </div>
